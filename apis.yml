@@ -1,0 +1,32 @@
+aid: spaceflight-news
+name: Spaceflight News
+description: "Spaceflight related news 🚀"
+url: https://spaceflightnewsapi.net
+specificationVersion: '0.20'
+created: '2026-05-28'
+modified: '2026-05-28'
+x-source: public-apis/public-apis
+x-category: "News"
+x-tier: 3
+x-tier-reason: bulk-registered-from-public-apis
+tags:
+  - News
+  - Public APIs
+apis:
+  - name: Spaceflight News
+    description: "Spaceflight related news 🚀"
+    humanURL: https://spaceflightnewsapi.net
+    baseURL: https://spaceflightnewsapi.net
+    tags:
+      - News
+    properties:
+      - type: Documentation
+        url: https://spaceflightnewsapi.net
+common:
+  - type: Website
+    url: https://spaceflightnewsapi.net
+  - type: PublicAPIsListing
+    url: https://github.com/public-apis/public-apis
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
