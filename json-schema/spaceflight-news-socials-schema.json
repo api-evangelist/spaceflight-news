@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spaceflight-news/refs/heads/main/json-schema/spaceflight-news-socials-schema.json",
+  "title": "Socials",
+  "description": "Social media handles for an author.",
+  "type": "object",
+  "properties": {
+    "x": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 200,
+      "description": "URL of the author's X (Twitter) profile.",
+      "example": "https://x.com/willrobinsons"
+    },
+    "youtube": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 200,
+      "description": "URL of the author's YouTube channel.",
+      "example": "https://youtube.com/@author"
+    },
+    "instagram": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 200,
+      "description": "URL of the author's Instagram profile.",
+      "example": "https://instagram.com/author"
+    },
+    "linkedin": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 200,
+      "description": "URL of the author's LinkedIn profile.",
+      "example": "https://linkedin.com/in/author"
+    },
+    "mastodon": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 200,
+      "description": "URL of the author's Mastodon profile.",
+      "example": "https://mastodon.social/@author"
+    },
+    "bluesky": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 200,
+      "description": "URL of the author's Bluesky profile.",
+      "example": "https://bsky.app/profile/author.bsky.social"
+    }
+  }
+}

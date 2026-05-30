@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spaceflight-news/refs/heads/main/json-schema/spaceflight-news-event-schema.json",
+  "title": "Event",
+  "description": "Relationship to a Launch Library 2 event (e.g. EVA, docking, milestone).",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "integer",
+      "maximum": 2147483647,
+      "minimum": -2147483648,
+      "description": "Launch Library 2 event identifier.",
+      "example": 851
+    },
+    "provider": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Source provider of the related event (typically Launch Library 2).",
+      "example": "Launch Library 2"
+    }
+  },
+  "required": [
+    "event_id",
+    "provider"
+  ]
+}

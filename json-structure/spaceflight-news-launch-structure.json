@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spaceflight-news/refs/heads/main/json-structure/spaceflight-news-launch-structure.json",
+  "name": "Launch",
+  "description": "Relationship to a Launch Library 2 launch.",
+  "type": "object",
+  "properties": {
+    "launch_id": {
+      "type": "uuid",
+      "description": "Launch Library 2 launch UUID.",
+      "example": "f33d5ece-e825-4cd8-809f-1d4c72a2e0d3"
+    },
+    "provider": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Source provider of the related launch (typically Launch Library 2).",
+      "example": "Launch Library 2"
+    }
+  },
+  "required": [
+    "launch_id",
+    "provider"
+  ]
+}

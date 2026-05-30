@@ -1,0 +1,403 @@
+# Spectral ruleset for the Spaceflight News API (SNAPI)
+# Enforces the conventions observed in TheSpaceDevs/spaceflightnewsapi v4 specs.
+extends:
+  - spectral:oas
+
+rules:
+
+  # ─────────────────────────────────────────────────────────────────
+  # INFO / METADATA
+  # ─────────────────────────────────────────────────────────────────
+  info-title-spaceflight-news-prefix:
+    description: API info.title should identify Spaceflight News API.
+    severity: warn
+    given: $.info
+    then:
+      field: title
+      function: pattern
+      functionOptions:
+        match: "^Spaceflight News API"
+
+  info-description-required:
+    description: API must have a substantive description (min 80 chars).
+    severity: warn
+    given: $.info
+    then:
+      field: description
+      function: length
+      functionOptions:
+        min: 80
+
+  info-version-required:
+    description: API must declare info.version.
+    severity: error
+    given: $.info
+    then:
+      field: version
+      function: truthy
+
+  info-contact-required:
+    description: API should provide an info.contact block.
+    severity: warn
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+
+  info-license-required:
+    description: API should declare a license (SNAPI is AGPL-3.0).
+    severity: warn
+    given: $.info
+    then:
+      field: license
+      function: truthy
+
+  # ─────────────────────────────────────────────────────────────────
+  # OPENAPI VERSION
+  # ─────────────────────────────────────────────────────────────────
+  openapi-version-3-0:
+    description: SNAPI specs should use OpenAPI 3.0.x.
+    severity: warn
+    given: $
+    then:
+      field: openapi
+      function: pattern
+      functionOptions:
+        match: "^3\\.0\\."
+
+  # ─────────────────────────────────────────────────────────────────
+  # SERVERS
+  # ─────────────────────────────────────────────────────────────────
+  servers-required:
+    description: At least one server URL must be defined.
+    severity: error
+    given: $
+    then:
+      field: servers
+      function: truthy
+
+  servers-https-only:
+    description: Server URLs must use HTTPS.
+    severity: error
+    given: $.servers[*]
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: "^https://"
+
+  servers-snapi-v4-host:
+    description: Production server should be api.spaceflightnewsapi.net/v4.
+    severity: warn
+    given: $.servers[*]
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: "^https://api\\.spaceflightnewsapi\\.net/v4"
+
+  # ─────────────────────────────────────────────────────────────────
+  # PATHS — NAMING CONVENTIONS
+  # ─────────────────────────────────────────────────────────────────
+  paths-lowercase-kebab:
+    description: Path segments must be lowercase kebab-case (snake_case not allowed in path segments).
+    severity: warn
+    given: $.paths
+    then:
+      function: pattern
+      field: "@key"
+      functionOptions:
+        match: "^/[a-z0-9/{}_-]*$"
+
+  paths-no-query-strings:
+    description: Path keys must not contain query strings.
+    severity: error
+    given: $.paths
+    then:
+      function: pattern
+      field: "@key"
+      functionOptions:
+        notMatch: "\\?"
+
+  paths-trailing-slash-snapi-style:
+    description: SNAPI paths end with a trailing slash by convention (`/articles/`, `/blogs/`, `/reports/`, `/info/`).
+    severity: info
+    given: $.paths
+    then:
+      function: pattern
+      field: "@key"
+      functionOptions:
+        match: "/$"
+
+  # ─────────────────────────────────────────────────────────────────
+  # OPERATIONS
+  # ─────────────────────────────────────────────────────────────────
+  operation-operationid-required:
+    description: Every operation must declare an operationId.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: truthy
+
+  operation-operationid-camel-case:
+    description: operationId should be camelCase (e.g. listArticles, retrieveBlog).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]+$"
+
+  operation-summary-required:
+    description: Every operation must have a summary.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: summary
+      function: truthy
+
+  operation-summary-snapi-prefix:
+    description: Operation summaries should begin with "Spaceflight News" prefix.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: summary
+      function: pattern
+      functionOptions:
+        match: "^Spaceflight News "
+
+  operation-description-required:
+    description: Every operation must have a description.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: description
+      function: truthy
+
+  operation-tags-required:
+    description: Every operation must declare at least one tag.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: tags
+      function: length
+      functionOptions:
+        min: 1
+
+  operation-microcks-extension:
+    description: Operations should declare x-microcks-operation for mock-server compatibility.
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: x-microcks-operation
+      function: truthy
+
+  # ─────────────────────────────────────────────────────────────────
+  # TAGS
+  # ─────────────────────────────────────────────────────────────────
+  tag-global-defined:
+    description: A global tags array should be defined at the document root.
+    severity: warn
+    given: $
+    then:
+      field: tags
+      function: truthy
+
+  tag-description-required:
+    description: Every global tag must have a description.
+    severity: warn
+    given: $.tags[*]
+    then:
+      field: description
+      function: truthy
+
+  tag-title-case-name:
+    description: Tag names should be Title Case (Articles, Blogs, Reports, Info).
+    severity: warn
+    given: $.tags[*]
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9 ]+$"
+
+  # ─────────────────────────────────────────────────────────────────
+  # PARAMETERS
+  # ─────────────────────────────────────────────────────────────────
+  parameter-description-required:
+    description: Every parameter must have a description.
+    severity: warn
+    given: $..parameters[*]
+    then:
+      field: description
+      function: truthy
+
+  parameter-snake-case:
+    description: Query/path parameter names should be snake_case (SNAPI convention).
+    severity: warn
+    given: $..parameters[?(@.in=='query' || @.in=='path')]
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9_]*$"
+
+  parameter-pagination-offset-limit:
+    description: Pagination uses offset and limit (SNAPI convention) rather than page/size or cursor.
+    severity: info
+    given: $..parameters[?(@.in=='query' && (@.name=='page' || @.name=='size' || @.name=='cursor'))]
+    then:
+      function: undefined
+
+  parameter-schema-type:
+    description: Every parameter must have a schema with a type.
+    severity: warn
+    given: $..parameters[*].schema
+    then:
+      field: type
+      function: truthy
+
+  # ─────────────────────────────────────────────────────────────────
+  # RESPONSES
+  # ─────────────────────────────────────────────────────────────────
+  response-200-required:
+    description: GET operations must declare a 200 response.
+    severity: error
+    given: $.paths[*].get.responses
+    then:
+      field: "200"
+      function: truthy
+
+  response-detail-404:
+    description: Retrieve-by-id operations should declare a 404 response.
+    severity: warn
+    given: "$.paths[?(@property.match(/\\{id\\}/))].get.responses"
+    then:
+      field: "404"
+      function: truthy
+
+  response-description-required:
+    description: Every response must have a description.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses[*]
+    then:
+      field: description
+      function: truthy
+
+  response-json-content-type:
+    description: Successful responses should use application/json.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses["200","201"].content
+    then:
+      field: application/json
+      function: truthy
+
+  # ─────────────────────────────────────────────────────────────────
+  # SCHEMAS — PROPERTY NAMING
+  # ─────────────────────────────────────────────────────────────────
+  schema-property-snake-case:
+    description: Schema properties should be snake_case (SNAPI convention).
+    severity: warn
+    given: $.components.schemas[*].properties
+    then:
+      function: pattern
+      field: "@key"
+      functionOptions:
+        match: "^[a-z][a-z0-9_]*$"
+
+  schema-description-required:
+    description: Top-level component schemas should have a description.
+    severity: warn
+    given: $.components.schemas[*]
+    then:
+      field: description
+      function: truthy
+
+  schema-type-required:
+    description: Schemas must declare a type.
+    severity: error
+    given: $.components.schemas[*]
+    then:
+      field: type
+      function: truthy
+
+  schema-id-readonly:
+    description: id properties should be marked readOnly.
+    severity: info
+    given: $.components.schemas[*].properties.id
+    then:
+      field: readOnly
+      function: truthy
+
+  schema-updated-at-readonly:
+    description: updated_at properties should be marked readOnly.
+    severity: info
+    given: $.components.schemas[*].properties.updated_at
+    then:
+      field: readOnly
+      function: truthy
+
+  schema-timestamps-date-time:
+    description: published_at and updated_at must use format date-time.
+    severity: warn
+    given: $.components.schemas[*].properties[published_at,updated_at]
+    then:
+      field: format
+      function: pattern
+      functionOptions:
+        match: "^date-time$"
+
+  schema-url-format-uri:
+    description: url and image_url properties must use format uri.
+    severity: warn
+    given: $.components.schemas[*].properties[url,image_url]
+    then:
+      field: format
+      function: pattern
+      functionOptions:
+        match: "^uri$"
+
+  schema-launch-uuid:
+    description: launch_id must use format uuid.
+    severity: warn
+    given: $.components.schemas[*].properties.launch_id
+    then:
+      field: format
+      function: pattern
+      functionOptions:
+        match: "^uuid$"
+
+  # ─────────────────────────────────────────────────────────────────
+  # SECURITY
+  # ─────────────────────────────────────────────────────────────────
+  security-public-api:
+    description: SNAPI is a public open API; operations may declare empty security `- {}` to make this explicit.
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: security
+      function: truthy
+
+  # ─────────────────────────────────────────────────────────────────
+  # HTTP METHOD CONVENTIONS
+  # ─────────────────────────────────────────────────────────────────
+  get-no-request-body:
+    description: GET operations must not have a request body.
+    severity: error
+    given: $.paths[*].get
+    then:
+      field: requestBody
+      function: falsy
+
+  # ─────────────────────────────────────────────────────────────────
+  # GENERAL QUALITY
+  # ─────────────────────────────────────────────────────────────────
+  examples-encouraged:
+    description: Schema properties should include an example value.
+    severity: info
+    given: $.components.schemas[*].properties[*]
+    then:
+      field: example
+      function: truthy

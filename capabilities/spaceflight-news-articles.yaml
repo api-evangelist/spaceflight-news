@@ -1,0 +1,299 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Spaceflight News API — Articles"
+  description: >-
+    Articles surface for the Spaceflight News API (SNAPI). 2 operations.
+    Lead operation: Spaceflight News List Articles. Self-contained Naftiko
+    capability covering one Spaceflight News business surface — aggregated
+    spaceflight news articles from 40+ publishers, filterable by news site,
+    date range, full-text search, related Launch Library 2 launch (UUID),
+    and event (LL2 ID).
+  tags:
+    - Spaceflight News
+    - News
+    - Articles
+  created: "2026-05-30"
+  modified: "2026-05-30"
+
+binds:
+  - namespace: env
+    keys: {}
+
+capability:
+
+  # ── 1. Consumes — the upstream HTTP API this capability speaks to ─────
+  consumes:
+    - type: http
+      namespace: "spaceflight-news-articles"
+      baseUri: "https://api.spaceflightnewsapi.net/v4"
+      description: "SNAPI v4 Articles surface. Public, no authentication required."
+      resources:
+        - name: "articles"
+          path: "/articles/"
+          operations:
+            - name: "listArticles"
+              method: GET
+              description: "List spaceflight news articles with rich filtering, ordering, and pagination."
+              inputParameters:
+                - name: "event"
+                  in: query
+                  type: array
+                  required: false
+                  description: "Search for articles related to a Launch Library 2 event by event ID."
+                - name: "has_event"
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "Filter to articles that have a related event."
+                - name: "has_launch"
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "Filter to articles that have a related launch."
+                - name: "is_featured"
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "Filter to featured articles."
+                - name: "launch"
+                  in: query
+                  type: array
+                  required: false
+                  description: "Search for articles related to a Launch Library 2 launch by UUID."
+                - name: "limit"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Number of results to return per page."
+                - name: "news_site"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated news site names to include."
+                - name: "news_site_exclude"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated news site names to exclude."
+                - name: "offset"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Initial index of the page to return."
+                - name: "ordering"
+                  in: query
+                  type: array
+                  required: false
+                  description: "Sort by published_at, -published_at, updated_at, or -updated_at."
+                - name: "published_at_gt"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Published after the given ISO 8601 timestamp (excluded)."
+                - name: "published_at_gte"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Published on or after the given ISO 8601 timestamp."
+                - name: "published_at_lt"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Published before the given ISO 8601 timestamp (excluded)."
+                - name: "published_at_lte"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Published on or before the given ISO 8601 timestamp."
+                - name: "search"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Search phrase across title or summary."
+                - name: "summary_contains"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Phrase to match in the summary."
+                - name: "summary_contains_all"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated keywords that must ALL appear in summary."
+                - name: "summary_contains_one"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated keywords; at least one must appear in summary."
+                - name: "title_contains"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Phrase to match in the title."
+                - name: "title_contains_all"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated keywords that must ALL appear in title."
+                - name: "title_contains_one"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated keywords; at least one must appear in title."
+                - name: "updated_at_gt"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Updated after the given ISO 8601 timestamp (excluded)."
+                - name: "updated_at_gte"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Updated on or after the given ISO 8601 timestamp."
+                - name: "updated_at_lt"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Updated before the given ISO 8601 timestamp (excluded)."
+                - name: "updated_at_lte"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Updated on or before the given ISO 8601 timestamp."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "article"
+          path: "/articles/{id}/"
+          operations:
+            - name: "retrieveArticle"
+              method: GET
+              description: "Retrieve a single news article by its integer ID."
+              inputParameters:
+                - name: "id"
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Unique integer identifying this article."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  # ── 2. REST exposer — required default ─────────────────────────────────
+  exposes:
+    - type: rest
+      namespace: "spaceflight-news-articles-rest"
+      port: 8080
+      description: "REST adapter for SNAPI Articles. One Spectral-compliant resource per consumed operation, prefixed with /v1."
+      resources:
+        - path: "/v1/articles"
+          name: "articles"
+          description: "REST surface for the articles collection."
+          operations:
+            - method: GET
+              name: "listArticles"
+              description: "List spaceflight news articles."
+              call: "spaceflight-news-articles.listArticles"
+              with:
+                event: "rest.event"
+                has_event: "rest.has_event"
+                has_launch: "rest.has_launch"
+                is_featured: "rest.is_featured"
+                launch: "rest.launch"
+                limit: "rest.limit"
+                news_site: "rest.news_site"
+                news_site_exclude: "rest.news_site_exclude"
+                offset: "rest.offset"
+                ordering: "rest.ordering"
+                published_at_gt: "rest.published_at_gt"
+                published_at_gte: "rest.published_at_gte"
+                published_at_lt: "rest.published_at_lt"
+                published_at_lte: "rest.published_at_lte"
+                search: "rest.search"
+                summary_contains: "rest.summary_contains"
+                summary_contains_all: "rest.summary_contains_all"
+                summary_contains_one: "rest.summary_contains_one"
+                title_contains: "rest.title_contains"
+                title_contains_all: "rest.title_contains_all"
+                title_contains_one: "rest.title_contains_one"
+                updated_at_gt: "rest.updated_at_gt"
+                updated_at_gte: "rest.updated_at_gte"
+                updated_at_lt: "rest.updated_at_lt"
+                updated_at_lte: "rest.updated_at_lte"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/articles/{id}"
+          name: "article"
+          description: "REST surface for a single article."
+          operations:
+            - method: GET
+              name: "retrieveArticle"
+              description: "Retrieve a single article by ID."
+              call: "spaceflight-news-articles.retrieveArticle"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    # ── 3. MCP exposer — required default ───────────────────────────────
+    - type: mcp
+      namespace: "spaceflight-news-articles-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for SNAPI Articles. One verb-noun tool per consumed operation."
+      tools:
+        - name: "list-articles"
+          description: "List spaceflight news articles with filtering, ordering, and pagination."
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "spaceflight-news-articles.listArticles"
+          with:
+            event: "tools.event"
+            has_event: "tools.has_event"
+            has_launch: "tools.has_launch"
+            is_featured: "tools.is_featured"
+            launch: "tools.launch"
+            limit: "tools.limit"
+            news_site: "tools.news_site"
+            news_site_exclude: "tools.news_site_exclude"
+            offset: "tools.offset"
+            ordering: "tools.ordering"
+            published_at_gt: "tools.published_at_gt"
+            published_at_gte: "tools.published_at_gte"
+            published_at_lt: "tools.published_at_lt"
+            published_at_lte: "tools.published_at_lte"
+            search: "tools.search"
+            summary_contains: "tools.summary_contains"
+            summary_contains_all: "tools.summary_contains_all"
+            summary_contains_one: "tools.summary_contains_one"
+            title_contains: "tools.title_contains"
+            title_contains_all: "tools.title_contains_all"
+            title_contains_one: "tools.title_contains_one"
+            updated_at_gt: "tools.updated_at_gt"
+            updated_at_gte: "tools.updated_at_gte"
+            updated_at_lt: "tools.updated_at_lt"
+            updated_at_lte: "tools.updated_at_lte"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "retrieve-article"
+          description: "Retrieve a single news article by ID."
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "spaceflight-news-articles.retrieveArticle"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."

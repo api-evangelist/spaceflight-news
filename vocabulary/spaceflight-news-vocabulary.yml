@@ -1,0 +1,223 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Spaceflight News API (SNAPI)"
+  description: >-
+    Unified vocabulary mapping the operational dimension of the Spaceflight
+    News API (v4 OpenAPI specification) to the capability dimension (Naftiko
+    REST + MCP capability files). SNAPI is a public open-source API by The
+    Space Devs that aggregates spaceflight news, blog posts, and reports
+    from 40+ publishers, with optional relationships to Launch Library 2
+    launches and events.
+  created: "2026-05-30"
+  modified: "2026-05-30"
+
+# OPERATIONAL DIMENSION (from OpenAPI)
+operational:
+
+  apis:
+    - name: "Spaceflight News API v4"
+      namespace: "spaceflight-news"
+      version: "4.30.2"
+      baseUrl: "https://api.spaceflightnewsapi.net/v4"
+      status: active
+      tags:
+        - News
+        - Spaceflight
+        - Public Open API
+
+  resources:
+    - name: articles
+      api: "Spaceflight News API v4"
+      description: "Spaceflight news articles aggregated from 40+ publishers."
+      actions: [list, retrieve]
+    - name: blogs
+      api: "Spaceflight News API v4"
+      description: "Longform blog posts from spaceflight publishers."
+      actions: [list, retrieve]
+    - name: reports
+      api: "Spaceflight News API v4"
+      description: "Official mission, program, and agency reports."
+      actions: [list, retrieve]
+    - name: info
+      api: "Spaceflight News API v4"
+      description: "API metadata: version and list of imported news sites."
+      actions: [retrieve]
+
+  actions:
+    - name: list
+      httpMethods: [GET]
+      pattern: read
+      description: "Paginated collection retrieval with filters and ordering."
+    - name: retrieve
+      httpMethods: [GET]
+      pattern: read
+      description: "Single-record retrieval by integer ID."
+
+  schemas:
+    core:
+      - Article
+      - Blog
+      - Report
+      - Info
+    related:
+      - Launch
+      - Event
+      - Author
+      - Socials
+    pagination:
+      - PaginatedArticleList
+      - PaginatedBlogList
+      - PaginatedReportList
+
+  parameters:
+    pagination:
+      - limit
+      - offset
+    identifiers:
+      - id            # path parameter for retrieve operations
+      - launch        # LL2 launch UUID
+      - event         # LL2 event ID
+    filters:
+      news_site:
+        - news_site
+        - news_site_exclude
+      flags:
+        - has_launch
+        - has_event
+        - is_featured
+      dateRange:
+        - published_at_gt
+        - published_at_gte
+        - published_at_lt
+        - published_at_lte
+        - updated_at_gt
+        - updated_at_gte
+        - updated_at_lt
+        - updated_at_lte
+      fullTextSearch:
+        - search
+        - title_contains
+        - title_contains_all
+        - title_contains_one
+        - summary_contains
+        - summary_contains_all
+        - summary_contains_one
+    sort:
+      - ordering
+
+  enums:
+    ordering:
+      - published_at
+      - -published_at
+      - updated_at
+      - -updated_at
+
+  authentication:
+    schemes: []
+    note: "SNAPI is a public open API; no authentication is required. Operations declare empty `security: [{}]`."
+
+# CAPABILITY DIMENSION (from Naftiko)
+capability:
+
+  workflows:
+    - name: "Spaceflight News — Articles"
+      file: "capabilities/spaceflight-news-articles.yaml"
+      description: "Articles surface; list + retrieve operations with full filter set."
+      apis: ["Spaceflight News API v4"]
+      toolCount: 2
+      personas: [News Reader, Launch Tracker Developer, Researcher]
+      domains: [News, Articles]
+    - name: "Spaceflight News — Blogs"
+      file: "capabilities/spaceflight-news-blogs.yaml"
+      description: "Blogs surface; list + retrieve operations with full filter set."
+      apis: ["Spaceflight News API v4"]
+      toolCount: 2
+      personas: [News Reader, Editorial Curator]
+      domains: [News, Blogs]
+    - name: "Spaceflight News — Reports"
+      file: "capabilities/spaceflight-news-reports.yaml"
+      description: "Reports surface; list + retrieve operations with filter set (no launch/event filters)."
+      apis: ["Spaceflight News API v4"]
+      toolCount: 2
+      personas: [Mission Operator, Researcher]
+      domains: [News, Reports]
+    - name: "Spaceflight News — Info"
+      file: "capabilities/spaceflight-news-info.yaml"
+      description: "Info surface; retrieve API metadata including list of imported news sites."
+      apis: ["Spaceflight News API v4"]
+      toolCount: 1
+      personas: [Integrator]
+      domains: [Metadata]
+
+  personas:
+    - id: news-reader
+      name: "News Reader"
+      description: "End user consuming a news feed in a mobile/web app."
+      workflows: [spaceflight-news-articles, spaceflight-news-blogs]
+    - id: launch-tracker-developer
+      name: "Launch Tracker Developer"
+      description: "Developer building a launch tracking app that surfaces related news per launch UUID."
+      workflows: [spaceflight-news-articles]
+    - id: editorial-curator
+      name: "Editorial Curator"
+      description: "Editor curating a daily/weekly rollup across many publishers."
+      workflows: [spaceflight-news-articles, spaceflight-news-blogs]
+    - id: mission-operator
+      name: "Mission Operator"
+      description: "Operations engineer surfacing official mission reports on a dashboard."
+      workflows: [spaceflight-news-reports]
+    - id: researcher
+      name: "Researcher"
+      description: "Analyst building a corpus for NLP/topic-modelling on space industry coverage."
+      workflows: [spaceflight-news-articles, spaceflight-news-reports]
+    - id: integrator
+      name: "Integrator"
+      description: "Developer wiring SNAPI into a downstream system; needs version + site list."
+      workflows: [spaceflight-news-info]
+
+  domains:
+    - name: News
+      resources: [articles, blogs]
+    - name: Reports
+      resources: [reports]
+    - name: Metadata
+      resources: [info]
+
+  namespaces:
+    consumed:
+      - spaceflight-news-articles
+      - spaceflight-news-blogs
+      - spaceflight-news-reports
+      - spaceflight-news-info
+    rest:
+      - { ns: spaceflight-news-articles-rest, port: 8080 }
+      - { ns: spaceflight-news-blogs-rest, port: 8080 }
+      - { ns: spaceflight-news-reports-rest, port: 8080 }
+      - { ns: spaceflight-news-info-rest, port: 8080 }
+    mcp:
+      - { ns: spaceflight-news-articles-mcp, port: 9090, transport: http }
+      - { ns: spaceflight-news-blogs-mcp, port: 9090, transport: http }
+      - { ns: spaceflight-news-reports-mcp, port: 9090, transport: http }
+      - { ns: spaceflight-news-info-mcp, port: 9090, transport: http }
+
+  binds: []
+
+# CROSS-REFERENCE
+crossReference:
+  - resource: articles
+    operations: [listArticles, retrieveArticle]
+    workflows: ["Spaceflight News — Articles"]
+    personas: [News Reader, Launch Tracker Developer, Editorial Curator, Researcher]
+  - resource: blogs
+    operations: [listBlogs, retrieveBlog]
+    workflows: ["Spaceflight News — Blogs"]
+    personas: [News Reader, Editorial Curator]
+  - resource: reports
+    operations: [listReports, retrieveReport]
+    workflows: ["Spaceflight News — Reports"]
+    personas: [Mission Operator, Researcher]
+  - resource: info
+    operations: [retrieveInfo]
+    workflows: ["Spaceflight News — Info"]
+    personas: [Integrator]

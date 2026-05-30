@@ -1,0 +1,36 @@
+{
+  "id": 2277,
+  "title": "United Launch Alliance Precisely Delivers Seventh Amazon Leo Mission",
+  "authors": [
+    {
+      "name": "Will Robinson-Smith",
+      "socials": {
+        "x": "https://x.com/willrobinsons",
+        "youtube": "https://youtube.com/@author",
+        "instagram": "https://instagram.com/author",
+        "linkedin": "https://linkedin.com/in/author",
+        "mastodon": "https://mastodon.social/@author",
+        "bluesky": "https://bsky.app/profile/author.bsky.social"
+      }
+    }
+  ],
+  "url": "https://blog.ulalaunch.com/blog/seventh-amazon-leo-mission",
+  "image_url": "https://blog.ulalaunch.com/hubfs/av_leo7_l4_media.jpg",
+  "news_site": "United Launch Alliance",
+  "summary": "ULA has launched the majority of Amazon Leo satellites on orbit.",
+  "published_at": "2026-05-30T01:40:06Z",
+  "updated_at": "2026-05-30T01:50:20.401325Z",
+  "featured": false,
+  "launches": [
+    {
+      "launch_id": "f33d5ece-e825-4cd8-809f-1d4c72a2e0d3",
+      "provider": "Launch Library 2"
+    }
+  ],
+  "events": [
+    {
+      "event_id": 851,
+      "provider": "Launch Library 2"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": 1662,
+  "title": "Starliner arrives safely back on Earth",
+  "authors": [
+    {
+      "name": "Will Robinson-Smith",
+      "socials": {
+        "x": "https://x.com/willrobinsons",
+        "youtube": "https://youtube.com/@author",
+        "instagram": "https://instagram.com/author",
+        "linkedin": "https://linkedin.com/in/author",
+        "mastodon": "https://mastodon.social/@author",
+        "bluesky": "https://bsky.app/profile/author.bsky.social"
+      }
+    }
+  ],
+  "url": "https://starlinerupdates.com/starliner-arrives-safely-back-on-earth/",
+  "image_url": "https://boeing-jtti.s3.amazonaws.com/wp-content/uploads/2023/02/docking.png",
+  "news_site": "Boeing",
+  "summary": "Boeing's Starliner landed safely at 12:01 a.m. Eastern time on Saturday.",
+  "published_at": "2024-09-07T04:14:32Z",
+  "updated_at": "2024-09-07T04:18:06.656360Z"
+}

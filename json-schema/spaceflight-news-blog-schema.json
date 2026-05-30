@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spaceflight-news/refs/heads/main/json-schema/spaceflight-news-blog-schema.json",
+  "title": "Blog",
+  "description": "A spaceflight blog post (longform commentary or analysis) from a participating publisher.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true,
+      "description": "Unique identifier of the blog post.",
+      "example": 2277
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 250,
+      "description": "Title of the blog post.",
+      "example": "United Launch Alliance Precisely Delivers Seventh Amazon Leo Mission"
+    },
+    "authors": {
+      "type": "array",
+      "description": "List of authors who contributed to the blog post.",
+      "items": {
+        "type": "object",
+        "description": "Author byline for an article, blog, or report.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 250,
+            "description": "Display name of the author.",
+            "example": "Will Robinson-Smith"
+          },
+          "socials": {
+            "type": "object",
+            "description": "Social media handles for an author.",
+            "properties": {
+              "x": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 200,
+                "description": "URL of the author's X (Twitter) profile.",
+                "example": "https://x.com/willrobinsons"
+              },
+              "youtube": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 200,
+                "description": "URL of the author's YouTube channel.",
+                "example": "https://youtube.com/@author"
+              },
+              "instagram": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 200,
+                "description": "URL of the author's Instagram profile.",
+                "example": "https://instagram.com/author"
+              },
+              "linkedin": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 200,
+                "description": "URL of the author's LinkedIn profile.",
+                "example": "https://linkedin.com/in/author"
+              },
+              "mastodon": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 200,
+                "description": "URL of the author's Mastodon profile.",
+                "example": "https://mastodon.social/@author"
+              },
+              "bluesky": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 200,
+                "description": "URL of the author's Bluesky profile.",
+                "example": "https://bsky.app/profile/author.bsky.social"
+              }
+            }
+          }
+        },
+        "required": [
+          "name"
+        ]
+      }
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 200,
+      "description": "Canonical URL of the blog post on the source publisher.",
+      "example": "https://blog.ulalaunch.com/blog/seventh-amazon-leo-mission"
+    },
+    "image_url": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 500,
+      "description": "URL to a cover/header image for the blog post.",
+      "example": "https://blog.ulalaunch.com/hubfs/av_leo7_l4_media.jpg"
+    },
+    "news_site": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Display name of the publisher.",
+      "example": "United Launch Alliance"
+    },
+    "summary": {
+      "type": "string",
+      "description": "Short summary of the blog post.",
+      "example": "ULA has launched the majority of Amazon Leo satellites on orbit."
+    },
+    "published_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the blog post was originally published.",
+      "example": "2026-05-30T01:40:06Z"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "description": "ISO 8601 timestamp when the blog post was last updated in SNAPI.",
+      "example": "2026-05-30T01:50:20.401325Z"
+    },
+    "featured": {
+      "type": "boolean",
+      "description": "Whether the blog post is featured.",
+      "example": false
+    },
+    "launches": {
+      "type": "array",
+      "description": "Related Launch Library 2 launches.",
+      "items": {
+        "type": "object",
+        "description": "Relationship to a Launch Library 2 launch.",
+        "properties": {
+          "launch_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Launch Library 2 launch UUID.",
+            "example": "f33d5ece-e825-4cd8-809f-1d4c72a2e0d3"
+          },
+          "provider": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Source provider of the related launch (typically Launch Library 2).",
+            "example": "Launch Library 2"
+          }
+        },
+        "required": [
+          "launch_id",
+          "provider"
+        ]
+      }
+    },
+    "events": {
+      "type": "array",
+      "description": "Related Launch Library 2 events.",
+      "items": {
+        "type": "object",
+        "description": "Relationship to a Launch Library 2 event (e.g. EVA, docking, milestone).",
+        "properties": {
+          "event_id": {
+            "type": "integer",
+            "maximum": 2147483647,
+            "minimum": -2147483648,
+            "description": "Launch Library 2 event identifier.",
+            "example": 851
+          },
+          "provider": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Source provider of the related event (typically Launch Library 2).",
+            "example": "Launch Library 2"
+          }
+        },
+        "required": [
+          "event_id",
+          "provider"
+        ]
+      }
+    }
+  },
+  "required": [
+    "authors",
+    "events",
+    "id",
+    "image_url",
+    "launches",
+    "news_site",
+    "published_at",
+    "summary",
+    "title",
+    "updated_at",
+    "url"
+  ]
+}

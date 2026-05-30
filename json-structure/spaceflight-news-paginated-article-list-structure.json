@@ -1,0 +1,178 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spaceflight-news/refs/heads/main/json-structure/spaceflight-news-paginated-article-list-structure.json",
+  "name": "PaginatedArticleList",
+  "description": "Paginated envelope wrapping a page of articles.",
+  "type": "object",
+  "properties": {
+    "count": {
+      "type": "int32",
+      "description": "Total number of articles matching the query.",
+      "example": 34380
+    },
+    "next": {
+      "type": "uri",
+      "nullable": true,
+      "description": "URL to fetch the next page of results, or null on the last page.",
+      "example": "https://api.spaceflightnewsapi.net/v4/articles/?limit=10&offset=20"
+    },
+    "previous": {
+      "type": "uri",
+      "nullable": true,
+      "description": "URL to fetch the previous page of results, or null on the first page.",
+      "example": "https://api.spaceflightnewsapi.net/v4/articles/?limit=10&offset=0"
+    },
+    "results": {
+      "type": "array",
+      "description": "The current page of articles.",
+      "items": {
+        "type": "object",
+        "description": "A spaceflight news article aggregated from a participating publisher.",
+        "properties": {
+          "id": {
+            "type": "int32",
+            "readOnly": true,
+            "description": "Unique identifier of the article.",
+            "example": 38168
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 250,
+            "description": "Title of the article.",
+            "example": "Live coverage: SpaceX to launch 50th Starlink mission of 2026"
+          },
+          "authors": {
+            "type": "array",
+            "description": "List of authors who contributed to the article.",
+            "items": {
+              "type": "object",
+              "description": "Author byline for an article, blog, or report.",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "maxLength": 250,
+                  "description": "Display name of the author.",
+                  "example": "Will Robinson-Smith"
+                },
+                "socials": {
+                  "$ref": "#/components/schemas/Socials"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          },
+          "url": {
+            "type": "uri",
+            "maxLength": 200,
+            "description": "Canonical URL of the article on the source publisher.",
+            "example": "https://spaceflightnow.com/2026/05/30/live-coverage-spacex-starlink/"
+          },
+          "image_url": {
+            "type": "uri",
+            "maxLength": 500,
+            "description": "URL to a cover/header image for the article.",
+            "example": "https://spaceflightnow.com/wp-content/uploads/2025/09/Starlink_Vertical.jpg"
+          },
+          "news_site": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Display name of the publisher that produced the article.",
+            "example": "Spaceflight Now"
+          },
+          "summary": {
+            "type": "string",
+            "description": "Short summary of the article body.",
+            "example": "The Starlink 17-41 mission is SpaceX's 10th and final launch of May."
+          },
+          "published_at": {
+            "type": "datetime",
+            "description": "ISO 8601 timestamp when the article was originally published.",
+            "example": "2026-05-30T13:46:18Z"
+          },
+          "updated_at": {
+            "type": "datetime",
+            "readOnly": true,
+            "description": "ISO 8601 timestamp when the article was last updated in SNAPI.",
+            "example": "2026-05-30T13:50:17.306479Z"
+          },
+          "featured": {
+            "type": "boolean",
+            "description": "Whether the article is featured (curated by SNAPI editors).",
+            "example": false
+          },
+          "launches": {
+            "type": "array",
+            "description": "Related Launch Library 2 launches.",
+            "items": {
+              "type": "object",
+              "description": "Relationship to a Launch Library 2 launch.",
+              "properties": {
+                "launch_id": {
+                  "type": "uuid",
+                  "description": "Launch Library 2 launch UUID.",
+                  "example": "f33d5ece-e825-4cd8-809f-1d4c72a2e0d3"
+                },
+                "provider": {
+                  "type": "string",
+                  "readOnly": true,
+                  "description": "Source provider of the related launch (typically Launch Library 2).",
+                  "example": "Launch Library 2"
+                }
+              },
+              "required": [
+                "launch_id",
+                "provider"
+              ]
+            }
+          },
+          "events": {
+            "type": "array",
+            "description": "Related Launch Library 2 events.",
+            "items": {
+              "type": "object",
+              "description": "Relationship to a Launch Library 2 event (e.g. EVA, docking, milestone).",
+              "properties": {
+                "event_id": {
+                  "type": "int32",
+                  "maximum": 2147483647,
+                  "minimum": -2147483648,
+                  "description": "Launch Library 2 event identifier.",
+                  "example": 851
+                },
+                "provider": {
+                  "type": "string",
+                  "readOnly": true,
+                  "description": "Source provider of the related event (typically Launch Library 2).",
+                  "example": "Launch Library 2"
+                }
+              },
+              "required": [
+                "event_id",
+                "provider"
+              ]
+            }
+          }
+        },
+        "required": [
+          "authors",
+          "events",
+          "id",
+          "image_url",
+          "launches",
+          "news_site",
+          "published_at",
+          "summary",
+          "title",
+          "updated_at",
+          "url"
+        ]
+      }
+    }
+  },
+  "required": [
+    "count",
+    "results"
+  ]
+}

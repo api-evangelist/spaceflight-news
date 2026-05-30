@@ -1,0 +1,137 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "snapi": "https://spaceflightnewsapi.net/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Article": "snapi:Article",
+    "Author": "snapi:Author",
+    "Blog": "snapi:Blog",
+    "Event": "snapi:Event",
+    "Info": "snapi:Info",
+    "Launch": "snapi:Launch",
+    "PaginatedArticleList": "snapi:PaginatedArticleList",
+    "PaginatedBlogList": "snapi:PaginatedBlogList",
+    "PaginatedReportList": "snapi:PaginatedReportList",
+    "Report": "snapi:Report",
+    "Socials": "snapi:Socials",
+    "authors": {
+      "@id": "snapi:authors",
+      "@container": "@set"
+    },
+    "bluesky": {
+      "@id": "snapi:bluesky",
+      "@type": "@id"
+    },
+    "count": {
+      "@id": "snapi:count",
+      "@type": "xsd:integer"
+    },
+    "eventId": {
+      "@id": "snapi:event_id",
+      "@type": "xsd:integer"
+    },
+    "events": {
+      "@id": "snapi:events",
+      "@container": "@set"
+    },
+    "featured": {
+      "@id": "snapi:featured",
+      "@type": "xsd:boolean"
+    },
+    "id": {
+      "@id": "snapi:id",
+      "@type": "xsd:integer"
+    },
+    "imageUrl": {
+      "@id": "schema:image",
+      "@type": "@id"
+    },
+    "instagram": {
+      "@id": "snapi:instagram",
+      "@type": "@id"
+    },
+    "launchId": {
+      "@id": "snapi:launch_id",
+      "@type": "xsd:string"
+    },
+    "launches": {
+      "@id": "snapi:launches",
+      "@container": "@set"
+    },
+    "linkedin": {
+      "@id": "snapi:linkedin",
+      "@type": "@id"
+    },
+    "mastodon": {
+      "@id": "snapi:mastodon",
+      "@type": "@id"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "newsSite": {
+      "@id": "snapi:news_site",
+      "@type": "xsd:string"
+    },
+    "newsSites": {
+      "@id": "snapi:news_sites",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "next": {
+      "@id": "snapi:next",
+      "@type": "@id"
+    },
+    "previous": {
+      "@id": "snapi:previous",
+      "@type": "@id"
+    },
+    "provider": {
+      "@id": "snapi:provider",
+      "@type": "xsd:string"
+    },
+    "publishedAt": {
+      "@id": "schema:datePublished",
+      "@type": "xsd:dateTime"
+    },
+    "results": {
+      "@id": "snapi:results",
+      "@container": "@set"
+    },
+    "socials": {
+      "@id": "snapi:socials",
+      "@type": "@id"
+    },
+    "summary": {
+      "@id": "schema:abstract",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "schema:headline",
+      "@type": "xsd:string"
+    },
+    "updatedAt": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "url": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "version": {
+      "@id": "schema:version",
+      "@type": "xsd:string"
+    },
+    "x": {
+      "@id": "snapi:x",
+      "@type": "@id"
+    },
+    "youtube": {
+      "@id": "snapi:youtube",
+      "@type": "@id"
+    }
+  }
+}

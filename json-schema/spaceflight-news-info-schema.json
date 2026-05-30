@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spaceflight-news/refs/heads/main/json-schema/spaceflight-news-info-schema.json",
+  "title": "Info",
+  "description": "API metadata describing the running SNAPI version and the news sites currently aggregated.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Current SNAPI version string.",
+      "example": "4.30.2"
+    },
+    "news_sites": {
+      "type": "array",
+      "description": "List of news site names currently imported by SNAPI.",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "NASA",
+        "SpaceX",
+        "ESA",
+        "Spaceflight Now"
+      ]
+    }
+  },
+  "required": [
+    "news_sites",
+    "version"
+  ]
+}

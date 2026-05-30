@@ -1,32 +1,193 @@
 aid: spaceflight-news
 name: Spaceflight News
-description: "Spaceflight related news 🚀"
+description: >-
+  The Spaceflight News API (SNAPI) by The Space Devs (TSD) is the most complete
+  and up-to-date open spaceflight news API. It aggregates articles, blogs, and
+  reports from 40+ news sites (NASA, ESA, SpaceX, Spaceflight Now, SpaceNews,
+  Ars Technica, Reuters, and more) and exposes them through a public REST API
+  (and a GraphQL endpoint). The project is open source under AGPL-3.0, runs on
+  community Patreon funding, and is integrated with the Launch Library 2 API so
+  any article can be linked to a specific launch or event.
 url: https://spaceflightnewsapi.net
+image: https://raw.githubusercontent.com/TheSpaceDevs/spaceflightnewsapi/main/.github/profile/assets/snapi_poster.png
 specificationVersion: '0.20'
 created: '2026-05-28'
-modified: '2026-05-28'
+modified: '2026-05-30'
 x-source: public-apis/public-apis
-x-category: "News"
-x-tier: 3
-x-tier-reason: bulk-registered-from-public-apis
+x-type: opensource
+x-category: News
+x-tier: 2
+x-tier-reason: enriched-from-public-source
+x-license: AGPL-3.0
+x-governance: community
+x-funding: Patreon
 tags:
   - News
+  - Space
+  - Spaceflight
+  - Aerospace
+  - Open Source
+  - Launches
   - Public APIs
 apis:
-  - name: Spaceflight News
-    description: "Spaceflight related news 🚀"
+  - name: Spaceflight News API v4
+    description: >-
+      REST API providing access to aggregated spaceflight news articles, blog
+      posts, and official mission reports from 40+ news sites. Supports rich
+      filtering (full-text search, news-site filters, date ranges, related
+      Launch Library 2 launches/events), pagination, and ordering. A companion
+      GraphQL endpoint is also exposed at /v4/graphql/.
     humanURL: https://spaceflightnewsapi.net
-    baseURL: https://spaceflightnewsapi.net
+    baseURL: https://api.spaceflightnewsapi.net/v4
+    version: 4.30.2
     tags:
       - News
+      - Space
+      - Articles
+      - Blogs
+      - Reports
     properties:
       - type: Documentation
-        url: https://spaceflightnewsapi.net
+        url: https://api.spaceflightnewsapi.net/v4/docs/
+      - type: OpenAPI
+        url: openapi/spaceflight-news-openapi.yml
+      - type: SwaggerUI
+        url: https://api.spaceflightnewsapi.net/v4/docs/
+      - type: GraphQL
+        title: GraphQL Endpoint
+        url: https://api.spaceflightnewsapi.net/v4/graphql/
+      - type: Schema
+        title: OpenAPI Schema (Live)
+        url: https://api.spaceflightnewsapi.net/v4/schema/
+      - type: Repository
+        url: https://github.com/TheSpaceDevs/spaceflightnewsapi
+      - type: SourceCode
+        url: https://github.com/TheSpaceDevs/spaceflightnewsapi
+      - type: NaftikoCapability
+        url: capabilities/spaceflight-news-articles.yaml
+      - type: NaftikoCapability
+        url: capabilities/spaceflight-news-blogs.yaml
+      - type: NaftikoCapability
+        url: capabilities/spaceflight-news-reports.yaml
+      - type: NaftikoCapability
+        url: capabilities/spaceflight-news-info.yaml
+  - name: Launch Library 2 API
+    description: >-
+      Sister API by The Space Devs, used by SNAPI to relate news articles to
+      specific launches and events. Provides upcoming/previous launch data,
+      events, agencies, astronauts, expeditions, spacecraft, launchers, and
+      pads. SNAPI articles, blogs, and reports can be filtered by `launch` (UUID)
+      or `event` (LL2 ID).
+    humanURL: https://thespacedevs.com/llapi
+    baseURL: https://ll.thespacedevs.com/2.3.0
+    tags:
+      - Space
+      - Launches
+      - Events
+    properties:
+      - type: Documentation
+        url: https://ll.thespacedevs.com/2.3.0/swagger/
+      - type: Tutorial
+        title: Launch Library 2 Tutorial
+        url: https://github.com/TheSpaceDevs/Tutorials
+      - type: Tools
+        title: Launch Library MCP Server
+        url: https://github.com/TheSpaceDevs/launch-library-mcp
 common:
   - type: Website
     url: https://spaceflightnewsapi.net
+  - type: Documentation
+    url: https://api.spaceflightnewsapi.net/v4/docs/
+  - type: Repository
+    url: https://github.com/TheSpaceDevs/spaceflightnewsapi
+  - type: GitHubOrganization
+    url: https://github.com/TheSpaceDevs
+  - type: License
+    title: AGPL-3.0
+    url: https://github.com/TheSpaceDevs/spaceflightnewsapi/blob/main/LICENSE
+  - type: ChangeLog
+    url: https://github.com/TheSpaceDevs/spaceflightnewsapi/releases
+  - type: Twitter
+    url: https://twitter.com/the_snapi
+  - type: Discord
+    url: https://discord.gg/p7ntkNA
+  - type: Patreon
+    title: Patreon (Funding)
+    url: https://www.patreon.com/TheSpaceDevs
+  - type: Email
+    url: derk@spaceflightnewsapi.net
   - type: PublicAPIsListing
     url: https://github.com/public-apis/public-apis
+  - type: Tutorials
+    title: TheSpaceDevs Tutorials & FAQs
+    url: https://github.com/TheSpaceDevs/Tutorials
+  - type: FAQ
+    title: SNAPI FAQ
+    url: https://github.com/TheSpaceDevs/Tutorials/blob/main/faqs/faq_SNAPI.md
+  - type: FAQ
+    title: TSD FAQ
+    url: https://github.com/TheSpaceDevs/Tutorials/blob/main/faqs/faq_TSD.md
+  - type: Tools
+    title: Launch Library MCP Server
+    url: https://github.com/TheSpaceDevs/launch-library-mcp
+  - type: Tools
+    title: SNAPI Website (snapiwebsite)
+    url: https://github.com/TheSpaceDevs/snapiwebsite
+  - type: Tools
+    title: Serpy (Serialization Library)
+    url: https://github.com/TheSpaceDevs/serpy
+  - type: SpectralRules
+    url: rules/spaceflight-news-rules.yml
+  - type: Vocabulary
+    url: vocabulary/spaceflight-news-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/spaceflight-news-context.jsonld
+x-features:
+  - name: News Aggregation
+    description: Aggregates spaceflight news from 40+ sites (NASA, ESA, SpaceX, ULA, Spaceflight Now, SpaceNews, Ars Technica, Reuters, and more) into a single API.
+  - name: Three Content Types
+    description: Separate endpoints for articles (news), blogs (op-eds and longform), and reports (official mission/program reports).
+  - name: Full-Text Search
+    description: Search articles by title, summary, or arbitrary keyword across all three content types.
+  - name: Launch Library 2 Integration
+    description: Every article can be linked to a Launch Library 2 launch (UUID) or event (LL2 ID), enabling related-news widgets in launch tracking apps.
+  - name: Rich Filtering
+    description: Filter by news site (inclusion/exclusion lists), published-at/updated-at date ranges, has_launch, has_event, is_featured.
+  - name: Ordering and Pagination
+    description: Order by published_at or updated_at (ascending or descending) with offset/limit pagination.
+  - name: GraphQL Endpoint
+    description: Companion GraphQL endpoint at /v4/graphql/ for clients that want to shape their own responses.
+  - name: Free and Open
+    description: Free to use, no authentication required, open source under AGPL-3.0, funded through Patreon.
+x-use-cases:
+  - name: Launch Tracker Companion Feed
+    description: Embed a "related news" feed alongside upcoming launches in a launch tracking app, using the LL2 launch UUID to filter SNAPI articles.
+  - name: Space Industry Newsletter
+    description: Pull recent articles, dedupe by news site, and publish a daily/weekly newsletter rollup.
+  - name: Voice Assistant Briefing
+    description: Power a daily spaceflight briefing skill that reads out the latest featured articles from a curated set of news sites.
+  - name: Research and Analysis
+    description: Build a corpus of spaceflight news for NLP/research projects (topic modeling, sentiment analysis, mission coverage analysis).
+  - name: Mission Operator Dashboard
+    description: Surface official mission reports alongside live telemetry/operations dashboards for situational awareness.
+  - name: Educational Apps
+    description: Power student-facing apps that pair upcoming launches with explanatory articles and blog posts.
+x-integrations:
+  - name: Launch Library 2 API
+    description: Sister TSD API; articles/blogs/reports can be linked to LL2 launch UUIDs and event IDs.
+  - name: Patreon
+    description: Funding model — the API is community-funded via Patreon contributions to The Space Devs.
+  - name: Discord
+    description: Support and feedback channel via the TSD Discord server (#feedback-and-help forum).
+  - name: GitHub Issues
+    description: Bug reports and feature requests handled via GitHub Issues on TheSpaceDevs/spaceflightnewsapi.
+x-solutions:
+  - name: Spaceflight News Apps
+    description: Mobile and web apps that aggregate and display spaceflight news from many publishers without each app maintaining its own scrapers.
+  - name: Mission Coverage Dashboards
+    description: Dashboards that combine launches, events, and news coverage in one view.
+  - name: Newsroom Tooling
+    description: Editorial dashboards for spaceflight journalists tracking what competitor outlets are publishing on a given mission.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

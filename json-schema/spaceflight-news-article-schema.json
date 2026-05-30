@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spaceflight-news/refs/heads/main/json-schema/spaceflight-news-article-schema.json",
+  "title": "Article",
+  "description": "A spaceflight news article aggregated from a participating publisher.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true,
+      "description": "Unique identifier of the article.",
+      "example": 38168
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 250,
+      "description": "Title of the article.",
+      "example": "Live coverage: SpaceX to launch 50th Starlink mission of 2026"
+    },
+    "authors": {
+      "type": "array",
+      "description": "List of authors who contributed to the article.",
+      "items": {
+        "type": "object",
+        "description": "Author byline for an article, blog, or report.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 250,
+            "description": "Display name of the author.",
+            "example": "Will Robinson-Smith"
+          },
+          "socials": {
+            "type": "object",
+            "description": "Social media handles for an author.",
+            "properties": {
+              "x": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 200,
+                "description": "URL of the author's X (Twitter) profile.",
+                "example": "https://x.com/willrobinsons"
+              },
+              "youtube": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 200,
+                "description": "URL of the author's YouTube channel.",
+                "example": "https://youtube.com/@author"
+              },
+              "instagram": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 200,
+                "description": "URL of the author's Instagram profile.",
+                "example": "https://instagram.com/author"
+              },
+              "linkedin": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 200,
+                "description": "URL of the author's LinkedIn profile.",
+                "example": "https://linkedin.com/in/author"
+              },
+              "mastodon": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 200,
+                "description": "URL of the author's Mastodon profile.",
+                "example": "https://mastodon.social/@author"
+              },
+              "bluesky": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 200,
+                "description": "URL of the author's Bluesky profile.",
+                "example": "https://bsky.app/profile/author.bsky.social"
+              }
+            }
+          }
+        },
+        "required": [
+          "name"
+        ]
+      }
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 200,
+      "description": "Canonical URL of the article on the source publisher.",
+      "example": "https://spaceflightnow.com/2026/05/30/live-coverage-spacex-starlink/"
+    },
+    "image_url": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 500,
+      "description": "URL to a cover/header image for the article.",
+      "example": "https://spaceflightnow.com/wp-content/uploads/2025/09/Starlink_Vertical.jpg"
+    },
+    "news_site": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Display name of the publisher that produced the article.",
+      "example": "Spaceflight Now"
+    },
+    "summary": {
+      "type": "string",
+      "description": "Short summary of the article body.",
+      "example": "The Starlink 17-41 mission is SpaceX's 10th and final launch of May."
+    },
+    "published_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the article was originally published.",
+      "example": "2026-05-30T13:46:18Z"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "description": "ISO 8601 timestamp when the article was last updated in SNAPI.",
+      "example": "2026-05-30T13:50:17.306479Z"
+    },
+    "featured": {
+      "type": "boolean",
+      "description": "Whether the article is featured (curated by SNAPI editors).",
+      "example": false
+    },
+    "launches": {
+      "type": "array",
+      "description": "Related Launch Library 2 launches.",
+      "items": {
+        "type": "object",
+        "description": "Relationship to a Launch Library 2 launch.",
+        "properties": {
+          "launch_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Launch Library 2 launch UUID.",
+            "example": "f33d5ece-e825-4cd8-809f-1d4c72a2e0d3"
+          },
+          "provider": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Source provider of the related launch (typically Launch Library 2).",
+            "example": "Launch Library 2"
+          }
+        },
+        "required": [
+          "launch_id",
+          "provider"
+        ]
+      }
+    },
+    "events": {
+      "type": "array",
+      "description": "Related Launch Library 2 events.",
+      "items": {
+        "type": "object",
+        "description": "Relationship to a Launch Library 2 event (e.g. EVA, docking, milestone).",
+        "properties": {
+          "event_id": {
+            "type": "integer",
+            "maximum": 2147483647,
+            "minimum": -2147483648,
+            "description": "Launch Library 2 event identifier.",
+            "example": 851
+          },
+          "provider": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Source provider of the related event (typically Launch Library 2).",
+            "example": "Launch Library 2"
+          }
+        },
+        "required": [
+          "event_id",
+          "provider"
+        ]
+      }
+    }
+  },
+  "required": [
+    "authors",
+    "events",
+    "id",
+    "image_url",
+    "launches",
+    "news_site",
+    "published_at",
+    "summary",
+    "title",
+    "updated_at",
+    "url"
+  ]
+}

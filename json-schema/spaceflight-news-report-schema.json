@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spaceflight-news/refs/heads/main/json-schema/spaceflight-news-report-schema.json",
+  "title": "Report",
+  "description": "A spaceflight report (mission report, program update, or agency briefing) from a participating publisher.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true,
+      "description": "Unique identifier of the report.",
+      "example": 1662
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 250,
+      "description": "Title of the report.",
+      "example": "Starliner arrives safely back on Earth"
+    },
+    "authors": {
+      "type": "array",
+      "description": "List of authors who contributed to the report.",
+      "items": {
+        "type": "object",
+        "description": "Author byline for an article, blog, or report.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 250,
+            "description": "Display name of the author.",
+            "example": "Will Robinson-Smith"
+          },
+          "socials": {
+            "type": "object",
+            "description": "Social media handles for an author.",
+            "properties": {
+              "x": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 200,
+                "description": "URL of the author's X (Twitter) profile.",
+                "example": "https://x.com/willrobinsons"
+              },
+              "youtube": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 200,
+                "description": "URL of the author's YouTube channel.",
+                "example": "https://youtube.com/@author"
+              },
+              "instagram": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 200,
+                "description": "URL of the author's Instagram profile.",
+                "example": "https://instagram.com/author"
+              },
+              "linkedin": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 200,
+                "description": "URL of the author's LinkedIn profile.",
+                "example": "https://linkedin.com/in/author"
+              },
+              "mastodon": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 200,
+                "description": "URL of the author's Mastodon profile.",
+                "example": "https://mastodon.social/@author"
+              },
+              "bluesky": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 200,
+                "description": "URL of the author's Bluesky profile.",
+                "example": "https://bsky.app/profile/author.bsky.social"
+              }
+            }
+          }
+        },
+        "required": [
+          "name"
+        ]
+      }
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 200,
+      "description": "Canonical URL of the report on the source publisher.",
+      "example": "https://starlinerupdates.com/starliner-arrives-safely-back-on-earth/"
+    },
+    "image_url": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 200,
+      "description": "URL to a cover/header image for the report.",
+      "example": "https://boeing-jtti.s3.amazonaws.com/wp-content/uploads/2023/02/docking.png"
+    },
+    "news_site": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Display name of the publisher that produced the report.",
+      "example": "Boeing"
+    },
+    "summary": {
+      "type": "string",
+      "description": "Short summary of the report.",
+      "example": "Boeing's Starliner landed safely at 12:01 a.m. Eastern time on Saturday."
+    },
+    "published_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the report was originally published.",
+      "example": "2024-09-07T04:14:32Z"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "description": "ISO 8601 timestamp when the report was last updated in SNAPI.",
+      "example": "2024-09-07T04:18:06.656360Z"
+    }
+  },
+  "required": [
+    "authors",
+    "id",
+    "image_url",
+    "news_site",
+    "published_at",
+    "title",
+    "updated_at",
+    "url"
+  ]
+}

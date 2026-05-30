@@ -1,0 +1,78 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Spaceflight News API — Info"
+  description: >-
+    Info surface for the Spaceflight News API (SNAPI). 1 operation.
+    Lead operation: Spaceflight News Retrieve Info. Self-contained Naftiko
+    capability covering one Spaceflight News business surface — returns
+    the running API version and the full list of news sites currently
+    aggregated by SNAPI, useful for building news-site picker UIs.
+  tags:
+    - Spaceflight News
+    - News
+    - Info
+  created: "2026-05-30"
+  modified: "2026-05-30"
+
+binds:
+  - namespace: env
+    keys: {}
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "spaceflight-news-info"
+      baseUri: "https://api.spaceflightnewsapi.net/v4"
+      description: "SNAPI v4 Info surface. Public, no authentication required."
+      resources:
+        - name: "info"
+          path: "/info/"
+          operations:
+            - name: "retrieveInfo"
+              method: GET
+              description: "Retrieve API metadata: current version and the list of imported news sites."
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "spaceflight-news-info-rest"
+      port: 8080
+      description: "REST adapter for SNAPI Info."
+      resources:
+        - path: "/v1/info"
+          name: "info"
+          description: "REST surface for the API info endpoint."
+          operations:
+            - method: GET
+              name: "retrieveInfo"
+              description: "Retrieve API metadata."
+              call: "spaceflight-news-info.retrieveInfo"
+              with: {}
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "spaceflight-news-info-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for SNAPI Info."
+      tools:
+        - name: "retrieve-info"
+          description: "Retrieve SNAPI version and the list of imported news sites."
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "spaceflight-news-info.retrieveInfo"
+          with: {}
+          outputParameters:
+            - type: object
+              mapping: "$."

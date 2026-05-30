@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spaceflight-news/refs/heads/main/json-structure/spaceflight-news-author-structure.json",
+  "name": "Author",
+  "description": "Author byline for an article, blog, or report.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "maxLength": 250,
+      "description": "Display name of the author.",
+      "example": "Will Robinson-Smith"
+    },
+    "socials": {
+      "type": "object",
+      "description": "Social media handles for an author.",
+      "properties": {
+        "x": {
+          "type": "uri",
+          "maxLength": 200,
+          "description": "URL of the author's X (Twitter) profile.",
+          "example": "https://x.com/willrobinsons"
+        },
+        "youtube": {
+          "type": "uri",
+          "maxLength": 200,
+          "description": "URL of the author's YouTube channel.",
+          "example": "https://youtube.com/@author"
+        },
+        "instagram": {
+          "type": "uri",
+          "maxLength": 200,
+          "description": "URL of the author's Instagram profile.",
+          "example": "https://instagram.com/author"
+        },
+        "linkedin": {
+          "type": "uri",
+          "maxLength": 200,
+          "description": "URL of the author's LinkedIn profile.",
+          "example": "https://linkedin.com/in/author"
+        },
+        "mastodon": {
+          "type": "uri",
+          "maxLength": 200,
+          "description": "URL of the author's Mastodon profile.",
+          "example": "https://mastodon.social/@author"
+        },
+        "bluesky": {
+          "type": "uri",
+          "maxLength": 200,
+          "description": "URL of the author's Bluesky profile.",
+          "example": "https://bsky.app/profile/author.bsky.social"
+        }
+      }
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

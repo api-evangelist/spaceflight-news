@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spaceflight-news/refs/heads/main/json-schema/spaceflight-news-paginated-report-list-schema.json",
+  "title": "PaginatedReportList",
+  "description": "Paginated envelope wrapping a page of reports.",
+  "type": "object",
+  "properties": {
+    "count": {
+      "type": "integer",
+      "description": "Total number of reports matching the query.",
+      "example": 1415
+    },
+    "next": {
+      "type": "string",
+      "nullable": true,
+      "format": "uri",
+      "description": "URL to fetch the next page of results, or null on the last page.",
+      "example": "https://api.spaceflightnewsapi.net/v4/reports/?limit=10&offset=20"
+    },
+    "previous": {
+      "type": "string",
+      "nullable": true,
+      "format": "uri",
+      "description": "URL to fetch the previous page of results, or null on the first page.",
+      "example": "https://api.spaceflightnewsapi.net/v4/reports/?limit=10&offset=0"
+    },
+    "results": {
+      "type": "array",
+      "description": "The current page of reports.",
+      "items": {
+        "type": "object",
+        "description": "A spaceflight report (mission report, program update, or agency briefing) from a participating publisher.",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true,
+            "description": "Unique identifier of the report.",
+            "example": 1662
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 250,
+            "description": "Title of the report.",
+            "example": "Starliner arrives safely back on Earth"
+          },
+          "authors": {
+            "type": "array",
+            "description": "List of authors who contributed to the report.",
+            "items": {
+              "type": "object",
+              "description": "Author byline for an article, blog, or report.",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "maxLength": 250,
+                  "description": "Display name of the author.",
+                  "example": "Will Robinson-Smith"
+                },
+                "socials": {
+                  "$ref": "#/components/schemas/Socials"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 200,
+            "description": "Canonical URL of the report on the source publisher.",
+            "example": "https://starlinerupdates.com/starliner-arrives-safely-back-on-earth/"
+          },
+          "image_url": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 200,
+            "description": "URL to a cover/header image for the report.",
+            "example": "https://boeing-jtti.s3.amazonaws.com/wp-content/uploads/2023/02/docking.png"
+          },
+          "news_site": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Display name of the publisher that produced the report.",
+            "example": "Boeing"
+          },
+          "summary": {
+            "type": "string",
+            "description": "Short summary of the report.",
+            "example": "Boeing's Starliner landed safely at 12:01 a.m. Eastern time on Saturday."
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 timestamp when the report was originally published.",
+            "example": "2024-09-07T04:14:32Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "description": "ISO 8601 timestamp when the report was last updated in SNAPI.",
+            "example": "2024-09-07T04:18:06.656360Z"
+          }
+        },
+        "required": [
+          "authors",
+          "id",
+          "image_url",
+          "news_site",
+          "published_at",
+          "title",
+          "updated_at",
+          "url"
+        ]
+      }
+    }
+  },
+  "required": [
+    "count",
+    "results"
+  ]
+}
