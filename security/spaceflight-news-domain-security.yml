@@ -1,0 +1,31 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: spaceflightnewsapi.net
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 21 09:23:58 2026 GMT
+  hsts: false
+- host: api.spaceflightnewsapi.net
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 16 20:28:37 2026 GMT
+  hsts: null
+- host: thespacedevs.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 29 05:16:03 2026 GMT
+  hsts: false
+domains:
+- domain: spaceflightnewsapi.net
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none
+- domain: thespacedevs.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: false

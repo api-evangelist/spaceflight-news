@@ -82,6 +82,8 @@ apis:
     title: Launch Library MCP Server
     url: https://github.com/TheSpaceDevs/launch-library-mcp
 common:
+- type: DomainSecurity
+  url: security/spaceflight-news-domain-security.yml
 - type: Website
   url: https://spaceflightnewsapi.net
 - type: Documentation
