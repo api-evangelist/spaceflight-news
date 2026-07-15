@@ -82,6 +82,8 @@ apis:
     title: Launch Library MCP Server
     url: https://github.com/TheSpaceDevs/launch-library-mcp
 common:
+- type: AgenticAccess
+  url: agentic-access/spaceflight-news-agentic-access.yml
 - type: DomainSecurity
   url: security/spaceflight-news-domain-security.yml
 - type: Website
