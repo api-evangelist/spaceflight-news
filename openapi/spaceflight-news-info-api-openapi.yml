@@ -1,0 +1,153 @@
+openapi: 3.0.3
+info:
+  title: Spaceflight News Articles Info API
+  version: 4.30.2
+  x-api-version: v4
+  x-generated-from: documentation
+  x-last-validated: '2026-05-30'
+  x-source-url: https://api.spaceflightnewsapi.net/v4/schema/
+  description: 'The Spaceflight News API (SNAPI) is a product by [The Space Devs](https://thespacedevs.com) (TSD).
+
+    It is the most complete and up-to-date open spaceflight news API currently available, aggregating
+
+    articles, blog posts, and official reports from 40+ news sites across the space industry.
+
+
+    While this API is **free to use**, the project encourages developers to support TSD through
+
+    [Patreon](https://www.patreon.com/TheSpaceDevs) to keep the API running.
+
+
+    ### GraphQL
+
+    A companion GraphQL endpoint is available at [/v4/graphql/](https://api.spaceflightnewsapi.net/v4/graphql/).
+
+
+    ### Launch Library 2 Integration
+
+    Every article, blog, and report can be linked to a Launch Library 2 launch (UUID) or event (LL2 ID),
+
+    enabling launch tracking apps to surface related news.
+
+
+    ### FAQs & Tutorials
+
+    - [TheSpaceDevs Tutorials repo](https://github.com/TheSpaceDevs/Tutorials)
+
+    - [SNAPI FAQ](https://github.com/TheSpaceDevs/Tutorials/blob/main/faqs/faq_SNAPI.md)
+
+    - [TSD FAQ](https://github.com/TheSpaceDevs/Tutorials/blob/main/faqs/faq_TSD.md)
+
+
+    ### Feedback & Support
+
+    Reach the team on the TSD [Discord server](https://discord.gg/p7ntkNA) (#feedback-and-help) or
+
+    email [derk@spaceflightnewsapi.net](mailto:derk@spaceflightnewsapi.net).
+
+    '
+  contact:
+    name: The Space Devs
+    email: derk@spaceflightnewsapi.net
+    url: https://spaceflightnewsapi.net
+  license:
+    name: AGPL-3.0
+    url: https://github.com/TheSpaceDevs/spaceflightnewsapi/blob/main/LICENSE
+servers:
+- url: https://api.spaceflightnewsapi.net/v4
+  description: Spaceflight News API production server (v4)
+tags:
+- name: Info
+  description: API metadata, version, and the list of currently imported news sites.
+paths:
+  /info/:
+    get:
+      operationId: retrieveInfo
+      summary: Spaceflight News Retrieve Info
+      description: Retrieve API metadata including the current API version and the full list of news sites currently imported by SNAPI. Useful for building news-site picker UIs.
+      tags:
+      - Info
+      security:
+      - {}
+      responses:
+        '200':
+          description: API version and the list of imported news sites.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Info'
+              examples:
+                RetrieveInfo200Example:
+                  summary: Default retrieveInfo 200 response
+                  x-microcks-default: true
+                  value:
+                    version: 4.30.2
+                    news_sites:
+                    - ABC News
+                    - AmericaSpace
+                    - Arstechnica
+                    - Blue Origin
+                    - Boeing
+                    - CNBC
+                    - CNES
+                    - ElonX
+                    - ESA
+                    - Euronews
+                    - European Spaceflight
+                    - Horizon
+                    - Jet Propulsion Laboratory
+                    - NASA
+                    - NASASpaceflight
+                    - National Geographic
+                    - National Space Society
+                    - Phys
+                    - Planetary Society
+                    - Reuters
+                    - Space.com
+                    - SpaceDaily
+                    - SpaceFlight Insider
+                    - Spaceflight Now
+                    - SpaceNews
+                    - SpacePolicyOnline.com
+                    - Space Scout
+                    - SpaceX
+                    - SyFy
+                    - TechCrunch
+                    - Teslarati
+                    - The Drive
+                    - The Japan Times
+                    - The Launch Pad
+                    - The National
+                    - The New York Times
+                    - The Space Devs
+                    - The Space Review
+                    - The Verge
+                    - The Wall Street Journal
+                    - United Launch Alliance
+                    - Virgin Galactic
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Info:
+      type: object
+      description: API metadata describing the running SNAPI version and the news sites currently aggregated.
+      properties:
+        version:
+          type: string
+          description: Current SNAPI version string.
+          example: 4.30.2
+        news_sites:
+          type: array
+          description: List of news site names currently imported by SNAPI.
+          items:
+            type: string
+          example:
+          - NASA
+          - SpaceX
+          - ESA
+          - Spaceflight Now
+      required:
+      - news_sites
+      - version
