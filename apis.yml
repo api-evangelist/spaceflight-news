@@ -7,6 +7,17 @@ description: >-
   open source under AGPL-3.0, runs on community Patreon funding, and is integrated with the Launch Library 2 API so any
   article can be linked to a specific launch or event.
 url: https://spaceflightnewsapi.net
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
 image: https://raw.githubusercontent.com/TheSpaceDevs/spaceflightnewsapi/main/.github/profile/assets/snapi_poster.png
 specificationVersion: '0.20'
 created: '2026-05-28'
@@ -28,44 +39,11 @@ tags:
 - Launches
 - Public APIs
 apis:
-- name: Spaceflight News API v4
-  description: >-
-    REST API providing access to aggregated spaceflight news articles, blog posts, and official mission reports from
-    40+ news sites. Supports rich filtering (full-text search, news-site filters, date ranges, related Launch Library
-    2 launches/events), pagination, and ordering. A companion GraphQL endpoint is also exposed at /v4/graphql/.
-  humanURL: https://spaceflightnewsapi.net
-  baseURL: https://api.spaceflightnewsapi.net/v4
-  version: 4.30.2
-  tags:
-  - News
-  - Space
-  - Articles
-  - Blogs
-  - Reports
-  properties:
-  - type: Documentation
-    url: https://api.spaceflightnewsapi.net/v4/docs/
-  - type: OpenAPI
-    url: openapi/spaceflight-news-openapi.yml
-  - type: SwaggerUI
-    url: https://api.spaceflightnewsapi.net/v4/docs/
-  - type: GraphQL
-    title: GraphQL Endpoint
-    url: https://api.spaceflightnewsapi.net/v4/graphql/
-  - type: Schema
-    title: OpenAPI Schema (Live)
-    url: https://api.spaceflightnewsapi.net/v4/schema/
-  - type: Repository
-    url: https://github.com/TheSpaceDevs/spaceflightnewsapi
-  - type: SourceCode
-    url: https://github.com/TheSpaceDevs/spaceflightnewsapi
-  - url: graphql/spaceflight-news-graphql.md
-    type: GraphQL
 - name: Launch Library 2 API
   description: >-
-    Sister API by The Space Devs, used by SNAPI to relate news articles to specific launches and events. Provides
-    upcoming/previous launch data, events, agencies, astronauts, expeditions, spacecraft, launchers, and pads. SNAPI
-    articles, blogs, and reports can be filtered by `launch` (UUID) or `event` (LL2 ID).
+    Sister API by The Space Devs, used by SNAPI to relate news articles to specific launches and events.
+    Provides upcoming/previous launch data, events, agencies, astronauts, expeditions, spacecraft, launchers,
+    and pads. SNAPI articles, blogs, and reports can be filtered by `launch` (UUID) or `event` (LL2 ID).
   humanURL: https://thespacedevs.com/llapi
   baseURL: https://ll.thespacedevs.com/2.3.0
   tags:
@@ -81,6 +59,102 @@ apis:
   - type: Tools
     title: Launch Library MCP Server
     url: https://github.com/TheSpaceDevs/launch-library-mcp
+- aid: spaceflight-news:spaceflight-news-articles-api
+  name: Spaceflight News Articles API
+  description: News articles aggregated from 40+ spaceflight news sites.
+  humanURL: https://spaceflightnewsapi.net
+  baseURL: https://api.spaceflightnewsapi.net/v4
+  tags:
+  - Articles
+  properties:
+  - type: OpenAPI
+    url: openapi/spaceflight-news-articles-api-openapi.yml
+  - type: Documentation
+    url: https://api.spaceflightnewsapi.net/v4/docs/
+  - type: SwaggerUI
+    url: https://api.spaceflightnewsapi.net/v4/docs/
+  - type: GraphQL
+    url: https://api.spaceflightnewsapi.net/v4/graphql/
+  - type: Schema
+    url: https://api.spaceflightnewsapi.net/v4/schema/
+  - type: Repository
+    url: https://github.com/TheSpaceDevs/spaceflightnewsapi
+  - type: SourceCode
+    url: https://github.com/TheSpaceDevs/spaceflightnewsapi
+  - type: GraphQL
+    url: graphql/spaceflight-news-graphql.md
+- aid: spaceflight-news:spaceflight-news-blogs-api
+  name: Spaceflight News Blogs API
+  description: Blog posts and longform commentary from spaceflight publishers.
+  humanURL: https://spaceflightnewsapi.net
+  baseURL: https://api.spaceflightnewsapi.net/v4
+  tags:
+  - Blogs
+  properties:
+  - type: OpenAPI
+    url: openapi/spaceflight-news-blogs-api-openapi.yml
+  - type: Documentation
+    url: https://api.spaceflightnewsapi.net/v4/docs/
+  - type: SwaggerUI
+    url: https://api.spaceflightnewsapi.net/v4/docs/
+  - type: GraphQL
+    url: https://api.spaceflightnewsapi.net/v4/graphql/
+  - type: Schema
+    url: https://api.spaceflightnewsapi.net/v4/schema/
+  - type: Repository
+    url: https://github.com/TheSpaceDevs/spaceflightnewsapi
+  - type: SourceCode
+    url: https://github.com/TheSpaceDevs/spaceflightnewsapi
+  - type: GraphQL
+    url: graphql/spaceflight-news-graphql.md
+- aid: spaceflight-news:spaceflight-news-info-api
+  name: Spaceflight News Info API
+  description: API metadata, version, and the list of currently imported news sites.
+  humanURL: https://spaceflightnewsapi.net
+  baseURL: https://api.spaceflightnewsapi.net/v4
+  tags:
+  - Info
+  properties:
+  - type: OpenAPI
+    url: openapi/spaceflight-news-info-api-openapi.yml
+  - type: Documentation
+    url: https://api.spaceflightnewsapi.net/v4/docs/
+  - type: SwaggerUI
+    url: https://api.spaceflightnewsapi.net/v4/docs/
+  - type: GraphQL
+    url: https://api.spaceflightnewsapi.net/v4/graphql/
+  - type: Schema
+    url: https://api.spaceflightnewsapi.net/v4/schema/
+  - type: Repository
+    url: https://github.com/TheSpaceDevs/spaceflightnewsapi
+  - type: SourceCode
+    url: https://github.com/TheSpaceDevs/spaceflightnewsapi
+  - type: GraphQL
+    url: graphql/spaceflight-news-graphql.md
+- aid: spaceflight-news:spaceflight-news-reports-api
+  name: Spaceflight News Reports API
+  description: Official mission, program, and agency reports.
+  humanURL: https://spaceflightnewsapi.net
+  baseURL: https://api.spaceflightnewsapi.net/v4
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/spaceflight-news-reports-api-openapi.yml
+  - type: Documentation
+    url: https://api.spaceflightnewsapi.net/v4/docs/
+  - type: SwaggerUI
+    url: https://api.spaceflightnewsapi.net/v4/docs/
+  - type: GraphQL
+    url: https://api.spaceflightnewsapi.net/v4/graphql/
+  - type: Schema
+    url: https://api.spaceflightnewsapi.net/v4/schema/
+  - type: Repository
+    url: https://github.com/TheSpaceDevs/spaceflightnewsapi
+  - type: SourceCode
+    url: https://github.com/TheSpaceDevs/spaceflightnewsapi
+  - type: GraphQL
+    url: graphql/spaceflight-news-graphql.md
 common:
 - type: AgenticAccess
   url: agentic-access/spaceflight-news-agentic-access.yml
