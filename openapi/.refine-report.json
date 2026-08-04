@@ -1,0 +1,20 @@
+{
+  "provider": "spaceflight-news",
+  "sources": [
+    "spaceflight-news-articles-api-openapi.yml",
+    "spaceflight-news-blogs-api-openapi.yml",
+    "spaceflight-news-info-api-openapi.yml",
+    "spaceflight-news-reports-api-openapi.yml"
+  ],
+  "outputs": [
+    "spaceflight-news-articles-api-openapi.yml",
+    "spaceflight-news-blogs-api-openapi.yml",
+    "spaceflight-news-info-api-openapi.yml",
+    "spaceflight-news-reports-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
