@@ -180,8 +180,6 @@ common:
 - type: Patreon
   title: Patreon (Funding)
   url: https://www.patreon.com/TheSpaceDevs
-- type: Email
-  url: derk@spaceflightnewsapi.net
 - type: PublicAPIsListing
   url: https://github.com/public-apis/public-apis
 - type: Tutorials
