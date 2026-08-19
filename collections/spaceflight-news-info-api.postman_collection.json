@@ -1,0 +1,106 @@
+{
+  "item": [
+    {
+      "id": "cefd25e1-8057-49b5-ada7-3c958016d2ef",
+      "name": "Info",
+      "description": {
+        "content": "API metadata, version, and the list of currently imported news sites.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "44eff88d-7c00-4681-8c67-ebb7daf6d2cd",
+          "name": "Spaceflight News Retrieve Info",
+          "request": {
+            "name": "Spaceflight News Retrieve Info",
+            "description": {
+              "content": "Retrieve API metadata including the current API version and the full list of news sites currently imported by SNAPI. Useful for building news-site picker UIs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "info",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": [
+            {
+              "id": "fb46f48d-c1a9-4652-a19d-e6be3c5886f1",
+              "name": "API version and the list of imported news sites.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "info",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"4.30.2\",\n  \"news_sites\": [\n    \"ABC News\",\n    \"AmericaSpace\",\n    \"Arstechnica\",\n    \"Blue Origin\",\n    \"Boeing\",\n    \"CNBC\",\n    \"CNES\",\n    \"ElonX\",\n    \"ESA\",\n    \"Euronews\",\n    \"European Spaceflight\",\n    \"Horizon\",\n    \"Jet Propulsion Laboratory\",\n    \"NASA\",\n    \"NASASpaceflight\",\n    \"National Geographic\",\n    \"National Space Society\",\n    \"Phys\",\n    \"Planetary Society\",\n    \"Reuters\",\n    \"Space.com\",\n    \"SpaceDaily\",\n    \"SpaceFlight Insider\",\n    \"Spaceflight Now\",\n    \"SpaceNews\",\n    \"SpacePolicyOnline.com\",\n    \"Space Scout\",\n    \"SpaceX\",\n    \"SyFy\",\n    \"TechCrunch\",\n    \"Teslarati\",\n    \"The Drive\",\n    \"The Japan Times\",\n    \"The Launch Pad\",\n    \"The National\",\n    \"The New York Times\",\n    \"The Space Devs\",\n    \"The Space Review\",\n    \"The Verge\",\n    \"The Wall Street Journal\",\n    \"United Launch Alliance\",\n    \"Virgin Galactic\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.spaceflightnewsapi.net/v4",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c61df32a-009d-4523-8639-cd5a8cf7ca66",
+    "name": "Spaceflight News Articles Info API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Spaceflight News API (SNAPI) is a product by [The Space Devs](https://thespacedevs.com) (TSD).\nIt is the most complete and up-to-date open spaceflight news API currently available, aggregating\narticles, blog posts, and official reports from 40+ news sites across the space industry.\n\nWhile this API is **free to use**, the project encourages developers to support TSD through\n[Patreon](https://www.patreon.com/TheSpaceDevs) to keep the API running.\n\n### GraphQL\nA companion GraphQL endpoint is available at [/v4/graphql/](https://api.spaceflightnewsapi.net/v4/graphql/).\n\n### Launch Library 2 Integration\nEvery article, blog, and report can be linked to a Launch Library 2 launch (UUID) or event (LL2 ID),\nenabling launch tracking apps to surface related news.\n\n### FAQs & Tutorials\n- [TheSpaceDevs Tutorials repo](https://github.com/TheSpaceDevs/Tutorials)\n- [SNAPI FAQ](https://github.com/TheSpaceDevs/Tutorials/blob/main/faqs/faq_SNAPI.md)\n- [TSD FAQ](https://github.com/TheSpaceDevs/Tutorials/blob/main/faqs/faq_TSD.md)\n\n### Feedback & Support\nReach the team on the TSD [Discord server](https://discord.gg/p7ntkNA) (#feedback-and-help) or\nemail [derk@spaceflightnewsapi.net](mailto:derk@spaceflightnewsapi.net).\n\n\nContact Support:\n Name: The Space Devs\n Email: derk@spaceflightnewsapi.net",
+      "type": "text/plain"
+    }
+  }
+}

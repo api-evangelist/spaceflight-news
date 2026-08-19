@@ -1,0 +1,170 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Spaceflight News Articles Reports API",
+    "version": "4.30.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Spaceflight News List Reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.spaceflightnewsapi.net/v4/reports/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "news_site",
+                "value": "SpaceX,NASA",
+                "type": "query",
+                "description": "Search for documents with a news_site name present in a list of comma-separated values. Case insensitive."
+              },
+              {
+                "name": "news_site_exclude",
+                "value": "TechCrunch",
+                "type": "query",
+                "description": "Search for documents with a news_site name NOT present in a list of comma-separated values. Case insensitive."
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "ordering",
+                "value": "-published_at",
+                "type": "query",
+                "description": "Order the result on `published_at, -published_at, updated_at, -updated_at`.\n\n* `published_at` - Published at\n* `-published_at` - Published at (descending)\n* `updated_at` - Updated at\n* `-updated_at` - Updated at (descending)"
+              },
+              {
+                "name": "published_at_gt",
+                "value": "2025-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Get all documents published after a given ISO8601 timestamp (excluded)."
+              },
+              {
+                "name": "published_at_gte",
+                "value": "2025-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Get all documents published after a given ISO8601 timestamp (included)."
+              },
+              {
+                "name": "published_at_lt",
+                "value": "2026-12-31T23:59:59Z",
+                "type": "query",
+                "description": "Get all documents published before a given ISO8601 timestamp (excluded)."
+              },
+              {
+                "name": "published_at_lte",
+                "value": "2026-12-31T23:59:59Z",
+                "type": "query",
+                "description": "Get all documents published before a given ISO8601 timestamp (included)."
+              },
+              {
+                "name": "search",
+                "value": "Starship",
+                "type": "query",
+                "description": "Search for documents with a specific phrase in the title or summary."
+              },
+              {
+                "name": "summary_contains",
+                "value": "Falcon 9",
+                "type": "query",
+                "description": "Search for all documents with a specific phrase in the summary."
+              },
+              {
+                "name": "summary_contains_all",
+                "value": "Starship,booster",
+                "type": "query",
+                "description": "Search for documents with a summary containing all keywords from comma-separated values."
+              },
+              {
+                "name": "summary_contains_one",
+                "value": "Falcon,Starship,Dragon",
+                "type": "query",
+                "description": "Search for documents with a summary containing at least one keyword from comma-separated values."
+              },
+              {
+                "name": "title_contains",
+                "value": "SpaceX",
+                "type": "query",
+                "description": "Search for all documents with a specific phrase in the title."
+              },
+              {
+                "name": "title_contains_all",
+                "value": "Starlink,launch",
+                "type": "query",
+                "description": "Search for documents with a title containing all keywords from comma-separated values."
+              },
+              {
+                "name": "title_contains_one",
+                "value": "SpaceX,Blue Origin",
+                "type": "query",
+                "description": "Search for documents with a title containing at least one keyword from comma-separated values."
+              },
+              {
+                "name": "updated_at_gt",
+                "value": "2025-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Get all documents updated after a given ISO8601 timestamp (excluded)."
+              },
+              {
+                "name": "updated_at_gte",
+                "value": "2025-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Get all documents updated after a given ISO8601 timestamp (included)."
+              },
+              {
+                "name": "updated_at_lt",
+                "value": "2026-12-31T23:59:59Z",
+                "type": "query",
+                "description": "Get all documents updated before a given ISO8601 timestamp (excluded)."
+              },
+              {
+                "name": "updated_at_lte",
+                "value": "2026-12-31T23:59:59Z",
+                "type": "query",
+                "description": "Get all documents updated before a given ISO8601 timestamp (included)."
+              }
+            ]
+          },
+          "docs": "List official spaceflight reports (mission reports, program updates, and agency briefings) from participating publishers. Supports full-text search, news-site filtering, published_at/updated_at date range filters, and offset/limit pagination with ordering. Note that reports do not carry launch or event relationships."
+        },
+        {
+          "info": {
+            "name": "Spaceflight News Retrieve Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.spaceflightnewsapi.net/v4/reports/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "1662",
+                "type": "path",
+                "description": "A unique integer value identifying this report."
+              }
+            ]
+          },
+          "docs": "Retrieve a single report by its unique integer ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

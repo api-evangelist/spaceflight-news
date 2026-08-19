@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Spaceflight News Articles Info API",
+    "version": "4.30.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Info",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Spaceflight News Retrieve Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.spaceflightnewsapi.net/v4/info/"
+          },
+          "docs": "Retrieve API metadata including the current API version and the full list of news sites currently imported by SNAPI. Useful for building news-site picker UIs."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
