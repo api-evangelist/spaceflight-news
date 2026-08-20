@@ -35,6 +35,14 @@ tags:
 - Space
 - Spaceflight
 - Aerospace
+- Open-Source
+- Launches
+- Public APIs
+tags_raw:
+- News
+- Space
+- Spaceflight
+- Aerospace
 - Open Source
 - Launches
 - Public APIs
@@ -47,6 +55,10 @@ apis:
   humanURL: https://thespacedevs.com/llapi
   baseURL: https://ll.thespacedevs.com/2.3.0
   tags:
+  - Space
+  - Launches
+  - Event
+  tags_raw:
   - Space
   - Launches
   - Events
@@ -89,6 +101,8 @@ apis:
   humanURL: https://spaceflightnewsapi.net
   baseURL: https://api.spaceflightnewsapi.net/v4
   tags:
+  - Blog
+  tags_raw:
   - Blogs
   properties:
   - type: OpenAPI
