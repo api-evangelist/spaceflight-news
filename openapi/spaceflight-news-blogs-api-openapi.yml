@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Spaceflight News Articles Blogs API
   version: 4.30.2
@@ -178,164 +178,10 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    updated_at_lte:
-      in: query
-      name: updated_at_lte
-      description: Get all documents updated before a given ISO8601 timestamp (included).
-      schema:
-        type: string
-        format: date-time
-      example: '2026-12-31T23:59:59Z'
     updated_at_gt:
       in: query
       name: updated_at_gt
       description: Get all documents updated after a given ISO8601 timestamp (excluded).
-      schema:
-        type: string
-        format: date-time
-      example: '2025-01-01T00:00:00Z'
-    published_at_lt:
-      in: query
-      name: published_at_lt
-      description: Get all documents published before a given ISO8601 timestamp (excluded).
-      schema:
-        type: string
-        format: date-time
-      example: '2026-12-31T23:59:59Z'
-    title_contains_all:
-      in: query
-      name: title_contains_all
-      description: Search for documents with a title containing all keywords from comma-separated values.
-      schema:
-        type: string
-      example: Starlink,launch
-    launch:
-      in: query
-      name: launch
-      description: Search for all documents related to a specific launch using its Launch Library 2 UUID.
-      schema:
-        type: array
-        items:
-          type: string
-          format: uuid
-      explode: false
-      style: form
-      example:
-      - f33d5ece-e825-4cd8-809f-1d4c72a2e0d3
-    published_at_gt:
-      in: query
-      name: published_at_gt
-      description: Get all documents published after a given ISO8601 timestamp (excluded).
-      schema:
-        type: string
-        format: date-time
-      example: '2025-01-01T00:00:00Z'
-    title_contains:
-      in: query
-      name: title_contains
-      description: Search for all documents with a specific phrase in the title.
-      schema:
-        type: string
-      example: SpaceX
-    updated_at_gte:
-      in: query
-      name: updated_at_gte
-      description: Get all documents updated after a given ISO8601 timestamp (included).
-      schema:
-        type: string
-        format: date-time
-      example: '2025-01-01T00:00:00Z'
-    has_launch:
-      in: query
-      name: has_launch
-      description: Get all documents that have a related launch.
-      schema:
-        type: boolean
-      example: true
-    summary_contains:
-      in: query
-      name: summary_contains
-      description: Search for all documents with a specific phrase in the summary.
-      schema:
-        type: string
-      example: Falcon 9
-    summary_contains_all:
-      in: query
-      name: summary_contains_all
-      description: Search for documents with a summary containing all keywords from comma-separated values.
-      schema:
-        type: string
-      example: Starship,booster
-    is_featured:
-      in: query
-      name: is_featured
-      description: Get all documents that are featured.
-      schema:
-        type: boolean
-      example: true
-    title_contains_one:
-      in: query
-      name: title_contains_one
-      description: Search for documents with a title containing at least one keyword from comma-separated values.
-      schema:
-        type: string
-      example: SpaceX,Blue Origin
-    search:
-      in: query
-      name: search
-      required: false
-      description: Search for documents with a specific phrase in the title or summary.
-      schema:
-        type: string
-      example: Starship
-    has_event:
-      in: query
-      name: has_event
-      description: Get all documents that have a related event.
-      schema:
-        type: boolean
-      example: true
-    summary_contains_one:
-      in: query
-      name: summary_contains_one
-      description: Search for documents with a summary containing at least one keyword from comma-separated values.
-      schema:
-        type: string
-      example: Falcon,Starship,Dragon
-    updated_at_lt:
-      in: query
-      name: updated_at_lt
-      description: Get all documents updated before a given ISO8601 timestamp (excluded).
-      schema:
-        type: string
-        format: date-time
-      example: '2026-12-31T23:59:59Z'
-    published_at_lte:
-      in: query
-      name: published_at_lte
-      description: Get all documents published before a given ISO8601 timestamp (included).
-      schema:
-        type: string
-        format: date-time
-      example: '2026-12-31T23:59:59Z'
-    news_site:
-      in: query
-      name: news_site
-      description: Search for documents with a news_site name present in a list of comma-separated values. Case insensitive.
-      schema:
-        type: string
-      example: SpaceX,NASA
-    news_site_exclude:
-      in: query
-      name: news_site_exclude
-      description: Search for documents with a news_site name NOT present in a list of comma-separated values. Case insensitive.
-      schema:
-        type: string
-      example: TechCrunch
-    published_at_gte:
-      in: query
-      name: published_at_gte
-      description: Get all documents published after a given ISO8601 timestamp (included).
       schema:
         type: string
         format: date-time
@@ -366,6 +212,82 @@ components:
       style: form
       example:
       - -published_at
+    updated_at_lte:
+      in: query
+      name: updated_at_lte
+      description: Get all documents updated before a given ISO8601 timestamp (included).
+      schema:
+        type: string
+        format: date-time
+      example: '2026-12-31T23:59:59Z'
+    updated_at_lt:
+      in: query
+      name: updated_at_lt
+      description: Get all documents updated before a given ISO8601 timestamp (excluded).
+      schema:
+        type: string
+        format: date-time
+      example: '2026-12-31T23:59:59Z'
+    summary_contains_one:
+      in: query
+      name: summary_contains_one
+      description: Search for documents with a summary containing at least one keyword from comma-separated values.
+      schema:
+        type: string
+      example: Falcon,Starship,Dragon
+    has_launch:
+      in: query
+      name: has_launch
+      description: Get all documents that have a related launch.
+      schema:
+        type: boolean
+      example: true
+    search:
+      in: query
+      name: search
+      required: false
+      description: Search for documents with a specific phrase in the title or summary.
+      schema:
+        type: string
+      example: Starship
+    published_at_gte:
+      in: query
+      name: published_at_gte
+      description: Get all documents published after a given ISO8601 timestamp (included).
+      schema:
+        type: string
+        format: date-time
+      example: '2025-01-01T00:00:00Z'
+    title_contains:
+      in: query
+      name: title_contains
+      description: Search for all documents with a specific phrase in the title.
+      schema:
+        type: string
+      example: SpaceX
+    updated_at_gte:
+      in: query
+      name: updated_at_gte
+      description: Get all documents updated after a given ISO8601 timestamp (included).
+      schema:
+        type: string
+        format: date-time
+      example: '2025-01-01T00:00:00Z'
+    is_featured:
+      in: query
+      name: is_featured
+      description: Get all documents that are featured.
+      schema:
+        type: boolean
+      example: true
+    offset:
+      in: query
+      name: offset
+      required: false
+      description: The initial index from which to return the results.
+      schema:
+        type: integer
+      example: 0
     event:
       in: query
       name: event
@@ -378,14 +300,34 @@ components:
       style: form
       example:
       - 42
-    offset:
+    summary_contains_all:
       in: query
-      name: offset
-      required: false
-      description: The initial index from which to return the results.
+      name: summary_contains_all
+      description: Search for documents with a summary containing all keywords from comma-separated values.
       schema:
-        type: integer
-      example: 0
+        type: string
+      example: Starship,booster
+    launch:
+      in: query
+      name: launch
+      description: Search for all documents related to a specific launch using its Launch Library 2 UUID.
+      schema:
+        type: array
+        items:
+          type: string
+          format: uuid
+      explode: false
+      style: form
+      example:
+      - f33d5ece-e825-4cd8-809f-1d4c72a2e0d3
+    published_at_lte:
+      in: query
+      name: published_at_lte
+      description: Get all documents published before a given ISO8601 timestamp (included).
+      schema:
+        type: string
+        format: date-time
+      example: '2026-12-31T23:59:59Z'
     limit:
       in: query
       name: limit
@@ -394,6 +336,64 @@ components:
       schema:
         type: integer
       example: 10
+    summary_contains:
+      in: query
+      name: summary_contains
+      description: Search for all documents with a specific phrase in the summary.
+      schema:
+        type: string
+      example: Falcon 9
+    news_site_exclude:
+      in: query
+      name: news_site_exclude
+      description: Search for documents with a news_site name NOT present in a list of comma-separated values. Case insensitive.
+      schema:
+        type: string
+      example: TechCrunch
+    title_contains_one:
+      in: query
+      name: title_contains_one
+      description: Search for documents with a title containing at least one keyword from comma-separated values.
+      schema:
+        type: string
+      example: SpaceX,Blue Origin
+    title_contains_all:
+      in: query
+      name: title_contains_all
+      description: Search for documents with a title containing all keywords from comma-separated values.
+      schema:
+        type: string
+      example: Starlink,launch
+    has_event:
+      in: query
+      name: has_event
+      description: Get all documents that have a related event.
+      schema:
+        type: boolean
+      example: true
+    published_at_lt:
+      in: query
+      name: published_at_lt
+      description: Get all documents published before a given ISO8601 timestamp (excluded).
+      schema:
+        type: string
+        format: date-time
+      example: '2026-12-31T23:59:59Z'
+    published_at_gt:
+      in: query
+      name: published_at_gt
+      description: Get all documents published after a given ISO8601 timestamp (excluded).
+      schema:
+        type: string
+        format: date-time
+      example: '2025-01-01T00:00:00Z'
+    news_site:
+      in: query
+      name: news_site
+      description: Search for documents with a news_site name present in a list of comma-separated values. Case insensitive.
+      schema:
+        type: string
+      example: SpaceX,NASA
   schemas:
     Launch:
       type: object
@@ -411,24 +411,6 @@ components:
           example: Launch Library 2
       required:
       - launch_id
-      - provider
-    Event:
-      type: object
-      description: Relationship to a Launch Library 2 event (e.g. EVA, docking, milestone).
-      properties:
-        event_id:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-          description: Launch Library 2 event identifier.
-          example: 851
-        provider:
-          type: string
-          readOnly: true
-          description: Source provider of the related event (typically Launch Library 2).
-          example: Launch Library 2
-      required:
-      - event_id
       - provider
     Author:
       type: object
@@ -520,6 +502,24 @@ components:
       - title
       - updated_at
       - url
+    Event:
+      type: object
+      description: Relationship to a Launch Library 2 event (e.g. EVA, docking, milestone).
+      properties:
+        event_id:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          description: Launch Library 2 event identifier.
+          example: 851
+        provider:
+          type: string
+          readOnly: true
+          description: Source provider of the related event (typically Launch Library 2).
+          example: Launch Library 2
+      required:
+      - event_id
+      - provider
     Socials:
       type: object
       description: Social media handles for an author.
@@ -572,14 +572,16 @@ components:
           description: Total number of blog posts matching the query.
           example: 1995
         next:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: uri
           description: URL to fetch the next page of results, or null on the last page.
           example: https://api.spaceflightnewsapi.net/v4/blogs/?limit=10&offset=20
         previous:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: uri
           description: URL to fetch the previous page of results, or null on the first page.
           example: https://api.spaceflightnewsapi.net/v4/blogs/?limit=10&offset=0
