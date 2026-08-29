@@ -7,6 +7,18 @@ description: >-
   open source under AGPL-3.0, runs on community Patreon funding, and is integrated with the Launch Library 2 API so any
   article can be linked to a specific launch or event.
 url: https://spaceflightnewsapi.net
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: false
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: unknown
@@ -170,6 +182,10 @@ apis:
   - type: GraphQL
     url: graphql/spaceflight-news-graphql.md
 common:
+- type: IssueTracker
+  url: https://github.com/TheSpaceDevs/spaceflightnewsapi/issues
+- type: SecurityPolicy
+  url: https://github.com/TheSpaceDevs/spaceflightnewsapi/blob/main/SECURITY.md
 - type: AgenticAccess
   url: agentic-access/spaceflight-news-agentic-access.yml
 - type: DomainSecurity
