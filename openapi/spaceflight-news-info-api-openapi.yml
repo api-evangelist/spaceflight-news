@@ -1,51 +1,12 @@
 openapi: 3.2.0
 info:
-  title: Spaceflight News Articles Info API
+  title: Spaceflight News Info API
   version: 4.30.2
   x-api-version: v4
   x-generated-from: documentation
   x-last-validated: '2026-05-30'
   x-source-url: https://api.spaceflightnewsapi.net/v4/schema/
-  description: 'The Spaceflight News API (SNAPI) is a product by [The Space Devs](https://thespacedevs.com) (TSD).
-
-    It is the most complete and up-to-date open spaceflight news API currently available, aggregating
-
-    articles, blog posts, and official reports from 40+ news sites across the space industry.
-
-
-    While this API is **free to use**, the project encourages developers to support TSD through
-
-    [Patreon](https://www.patreon.com/TheSpaceDevs) to keep the API running.
-
-
-    ### GraphQL
-
-    A companion GraphQL endpoint is available at [/v4/graphql/](https://api.spaceflightnewsapi.net/v4/graphql/).
-
-
-    ### Launch Library 2 Integration
-
-    Every article, blog, and report can be linked to a Launch Library 2 launch (UUID) or event (LL2 ID),
-
-    enabling launch tracking apps to surface related news.
-
-
-    ### FAQs & Tutorials
-
-    - [TheSpaceDevs Tutorials repo](https://github.com/TheSpaceDevs/Tutorials)
-
-    - [SNAPI FAQ](https://github.com/TheSpaceDevs/Tutorials/blob/main/faqs/faq_SNAPI.md)
-
-    - [TSD FAQ](https://github.com/TheSpaceDevs/Tutorials/blob/main/faqs/faq_TSD.md)
-
-
-    ### Feedback & Support
-
-    Reach the team on the TSD [Discord server](https://discord.gg/p7ntkNA) (#feedback-and-help) or
-
-    email [derk@spaceflightnewsapi.net](mailto:derk@spaceflightnewsapi.net).
-
-    '
+  description: The Spaceflight News API (SNAPI) is a product by The Space Devs (TSD).
   contact:
     name: The Space Devs
     email: derk@spaceflightnewsapi.net
