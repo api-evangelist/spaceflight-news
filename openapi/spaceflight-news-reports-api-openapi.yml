@@ -124,14 +124,6 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    published_at_gt:
-      in: query
-      name: published_at_gt
-      description: Get all documents published after a given ISO8601 timestamp (excluded).
-      schema:
-        type: string
-        format: date-time
-      example: '2025-01-01T00:00:00Z'
     updated_at_lt:
       in: query
       name: updated_at_lt
@@ -140,6 +132,65 @@ components:
         type: string
         format: date-time
       example: '2026-12-31T23:59:59Z'
+    title_contains:
+      in: query
+      name: title_contains
+      description: Search for all documents with a specific phrase in the title.
+      schema:
+        type: string
+      example: SpaceX
+    summary_contains_all:
+      in: query
+      name: summary_contains_all
+      description: Search for documents with a summary containing all keywords from comma-separated values.
+      schema:
+        type: string
+      example: Starship,booster
+    updated_at_lte:
+      in: query
+      name: updated_at_lte
+      description: Get all documents updated before a given ISO8601 timestamp (included).
+      schema:
+        type: string
+        format: date-time
+      example: '2026-12-31T23:59:59Z'
+    summary_contains_one:
+      in: query
+      name: summary_contains_one
+      description: Search for documents with a summary containing at least one keyword from comma-separated values.
+      schema:
+        type: string
+      example: Falcon,Starship,Dragon
+    offset:
+      in: query
+      name: offset
+      required: false
+      description: The initial index from which to return the results.
+      schema:
+        type: integer
+      example: 0
+    limit:
+      in: query
+      name: limit
+      required: false
+      description: Number of results to return per page.
+      schema:
+        type: integer
+      example: 10
+    summary_contains:
+      in: query
+      name: summary_contains
+      description: Search for all documents with a specific phrase in the summary.
+      schema:
+        type: string
+      example: Falcon 9
+    title_contains_one:
+      in: query
+      name: title_contains_one
+      description: Search for documents with a title containing at least one keyword from comma-separated values.
+      schema:
+        type: string
+      example: SpaceX,Blue Origin
     ordering:
       in: query
       name: ordering
@@ -173,66 +224,6 @@ components:
       schema:
         type: string
       example: Starlink,launch
-    published_at_lte:
-      in: query
-      name: published_at_lte
-      description: Get all documents published before a given ISO8601 timestamp (included).
-      schema:
-        type: string
-        format: date-time
-      example: '2026-12-31T23:59:59Z'
-    title_contains:
-      in: query
-      name: title_contains
-      description: Search for all documents with a specific phrase in the title.
-      schema:
-        type: string
-      example: SpaceX
-    published_at_lt:
-      in: query
-      name: published_at_lt
-      description: Get all documents published before a given ISO8601 timestamp (excluded).
-      schema:
-        type: string
-        format: date-time
-      example: '2026-12-31T23:59:59Z'
-    summary_contains_one:
-      in: query
-      name: summary_contains_one
-      description: Search for documents with a summary containing at least one keyword from comma-separated values.
-      schema:
-        type: string
-      example: Falcon,Starship,Dragon
-    search:
-      in: query
-      name: search
-      required: false
-      description: Search for documents with a specific phrase in the title or summary.
-      schema:
-        type: string
-      example: Starship
-    summary_contains_all:
-      in: query
-      name: summary_contains_all
-      description: Search for documents with a summary containing all keywords from comma-separated values.
-      schema:
-        type: string
-      example: Starship,booster
-    updated_at_lte:
-      in: query
-      name: updated_at_lte
-      description: Get all documents updated before a given ISO8601 timestamp (included).
-      schema:
-        type: string
-        format: date-time
-      example: '2026-12-31T23:59:59Z'
-    news_site_exclude:
-      in: query
-      name: news_site_exclude
-      description: Search for documents with a news_site name NOT present in a list of comma-separated values. Case insensitive.
-      schema:
-        type: string
-      example: TechCrunch
     published_at_gte:
       in: query
       name: published_at_gte
@@ -248,14 +239,6 @@ components:
       schema:
         type: string
       example: SpaceX,NASA
-    offset:
-      in: query
-      name: offset
-      required: false
-      description: The initial index from which to return the results.
-      schema:
-        type: integer
-      example: 0
     updated_at_gt:
       in: query
       name: updated_at_gt
@@ -264,13 +247,29 @@ components:
         type: string
         format: date-time
       example: '2025-01-01T00:00:00Z'
-    title_contains_one:
+    news_site_exclude:
       in: query
-      name: title_contains_one
-      description: Search for documents with a title containing at least one keyword from comma-separated values.
+      name: news_site_exclude
+      description: Search for documents with a news_site name NOT present in a list of comma-separated values. Case insensitive.
       schema:
         type: string
-      example: SpaceX,Blue Origin
+      example: TechCrunch
+    published_at_lt:
+      in: query
+      name: published_at_lt
+      description: Get all documents published before a given ISO8601 timestamp (excluded).
+      schema:
+        type: string
+        format: date-time
+      example: '2026-12-31T23:59:59Z'
+    published_at_lte:
+      in: query
+      name: published_at_lte
+      description: Get all documents published before a given ISO8601 timestamp (included).
+      schema:
+        type: string
+        format: date-time
+      example: '2026-12-31T23:59:59Z'
     updated_at_gte:
       in: query
       name: updated_at_gte
@@ -279,52 +278,23 @@ components:
         type: string
         format: date-time
       example: '2025-01-01T00:00:00Z'
-    limit:
+    search:
       in: query
-      name: limit
+      name: search
       required: false
-      description: Number of results to return per page.
-      schema:
-        type: integer
-      example: 10
-    summary_contains:
-      in: query
-      name: summary_contains
-      description: Search for all documents with a specific phrase in the summary.
+      description: Search for documents with a specific phrase in the title or summary.
       schema:
         type: string
-      example: Falcon 9
+      example: Starship
+    published_at_gt:
+      in: query
+      name: published_at_gt
+      description: Get all documents published after a given ISO8601 timestamp (excluded).
+      schema:
+        type: string
+        format: date-time
+      example: '2025-01-01T00:00:00Z'
   schemas:
-    PaginatedReportList:
-      type: object
-      description: Paginated envelope wrapping a page of reports.
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          description: Total number of reports matching the query.
-          example: 1415
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          description: URL to fetch the next page of results, or null on the last page.
-          example: https://api.spaceflightnewsapi.net/v4/reports/?limit=10&offset=20
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          description: URL to fetch the previous page of results, or null on the first page.
-          example: https://api.spaceflightnewsapi.net/v4/reports/?limit=10&offset=0
-        results:
-          type: array
-          description: The current page of reports.
-          items:
-            $ref: '#/components/schemas/Report'
     Author:
       type: object
       description: Author byline for an article, blog, or report.
@@ -398,6 +368,36 @@ components:
       - title
       - updated_at
       - url
+    PaginatedReportList:
+      type: object
+      description: Paginated envelope wrapping a page of reports.
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          description: Total number of reports matching the query.
+          example: 1415
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URL to fetch the next page of results, or null on the last page.
+          example: https://api.spaceflightnewsapi.net/v4/reports/?limit=10&offset=20
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URL to fetch the previous page of results, or null on the first page.
+          example: https://api.spaceflightnewsapi.net/v4/reports/?limit=10&offset=0
+        results:
+          type: array
+          description: The current page of reports.
+          items:
+            $ref: '#/components/schemas/Report'
     Socials:
       type: object
       description: Social media handles for an author.

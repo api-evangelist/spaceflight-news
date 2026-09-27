@@ -9,6 +9,9 @@ description: >-
 url: https://spaceflightnewsapi.net
 deliveryModel:
   model: unknown
+  license_evidence:
+    not_product:
+    - thespacedevs/spaceflightnewsapi
   open_source: unknown
   commercial: false
   callable_host: true
@@ -16,8 +19,8 @@ deliveryModel:
   confidence: low
   source:
   - openapi
-  - repository-unlicensed
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: unknown
@@ -47,7 +50,7 @@ tags:
 - Space
 - Spaceflight
 - Aerospace
-- Open-Source
+- Open Source
 - Launches
 - Public APIs
 tags_raw:
@@ -58,6 +61,7 @@ tags_raw:
 - Open Source
 - Launches
 - Public APIs
+- Open-Source
 apis:
 - name: Launch Library 2 API
   description: >-
