@@ -139,40 +139,26 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    title_contains_one:
-      in: query
-      name: title_contains_one
-      description: Search for documents with a title containing at least one keyword from comma-separated values.
-      schema:
-        type: string
-      example: SpaceX,Blue Origin
-    updated_at_gte:
-      in: query
-      name: updated_at_gte
-      description: Get all documents updated after a given ISO8601 timestamp (included).
-      schema:
-        type: string
-        format: date-time
-      example: '2025-01-01T00:00:00Z'
-    title_contains_all:
-      in: query
-      name: title_contains_all
-      description: Search for documents with a title containing all keywords from comma-separated values.
-      schema:
-        type: string
-      example: Starlink,launch
-    limit:
-      in: query
-      name: limit
-      required: false
-      description: Number of results to return per page.
-      schema:
-        type: integer
-      example: 10
     published_at_gte:
       in: query
       name: published_at_gte
       description: Get all documents published after a given ISO8601 timestamp (included).
+      schema:
+        type: string
+        format: date-time
+      example: '2025-01-01T00:00:00Z'
+    offset:
+      in: query
+      name: offset
+      required: false
+      description: The initial index from which to return the results.
+      schema:
+        type: integer
+      example: 0
+    updated_at_gt:
+      in: query
+      name: updated_at_gt
+      description: Get all documents updated after a given ISO8601 timestamp (excluded).
       schema:
         type: string
         format: date-time
@@ -185,42 +171,14 @@ components:
         type: string
         format: date-time
       example: '2026-12-31T23:59:59Z'
-    offset:
+    updated_at_gte:
       in: query
-      name: offset
-      required: false
-      description: The initial index from which to return the results.
-      schema:
-        type: integer
-      example: 0
-    news_site:
-      in: query
-      name: news_site
-      description: Search for documents with a news_site name present in a list of comma-separated values. Case insensitive.
+      name: updated_at_gte
+      description: Get all documents updated after a given ISO8601 timestamp (included).
       schema:
         type: string
-      example: SpaceX,NASA
-    summary_contains_all:
-      in: query
-      name: summary_contains_all
-      description: Search for documents with a summary containing all keywords from comma-separated values.
-      schema:
-        type: string
-      example: Starship,booster
-    is_featured:
-      in: query
-      name: is_featured
-      description: Get all documents that are featured.
-      schema:
-        type: boolean
-      example: true
-    title_contains:
-      in: query
-      name: title_contains
-      description: Search for all documents with a specific phrase in the title.
-      schema:
-        type: string
-      example: SpaceX
+        format: date-time
+      example: '2025-01-01T00:00:00Z'
     ordering:
       in: query
       name: ordering
@@ -247,6 +205,51 @@ components:
       style: form
       example:
       - -published_at
+    published_at_lte:
+      in: query
+      name: published_at_lte
+      description: Get all documents published before a given ISO8601 timestamp (included).
+      schema:
+        type: string
+        format: date-time
+      example: '2026-12-31T23:59:59Z'
+    is_featured:
+      in: query
+      name: is_featured
+      description: Get all documents that are featured.
+      schema:
+        type: boolean
+      example: true
+    news_site_exclude:
+      in: query
+      name: news_site_exclude
+      description: Search for documents with a news_site name NOT present in a list of comma-separated values. Case insensitive.
+      schema:
+        type: string
+      example: TechCrunch
+    updated_at_lt:
+      in: query
+      name: updated_at_lt
+      description: Get all documents updated before a given ISO8601 timestamp (excluded).
+      schema:
+        type: string
+        format: date-time
+      example: '2026-12-31T23:59:59Z'
+    summary_contains_all:
+      in: query
+      name: summary_contains_all
+      description: Search for documents with a summary containing all keywords from comma-separated values.
+      schema:
+        type: string
+      example: Starship,booster
+    published_at_gt:
+      in: query
+      name: published_at_gt
+      description: Get all documents published after a given ISO8601 timestamp (excluded).
+      schema:
+        type: string
+        format: date-time
+      example: '2025-01-01T00:00:00Z'
     summary_contains:
       in: query
       name: summary_contains
@@ -277,13 +280,42 @@ components:
       schema:
         type: boolean
       example: true
-    news_site_exclude:
+    news_site:
       in: query
-      name: news_site_exclude
-      description: Search for documents with a news_site name NOT present in a list of comma-separated values. Case insensitive.
+      name: news_site
+      description: Search for documents with a news_site name present in a list of comma-separated values. Case insensitive.
       schema:
         type: string
-      example: TechCrunch
+      example: SpaceX,NASA
+    limit:
+      in: query
+      name: limit
+      required: false
+      description: Number of results to return per page.
+      schema:
+        type: integer
+      example: 10
+    title_contains_all:
+      in: query
+      name: title_contains_all
+      description: Search for documents with a title containing all keywords from comma-separated values.
+      schema:
+        type: string
+      example: Starlink,launch
+    title_contains:
+      in: query
+      name: title_contains
+      description: Search for all documents with a specific phrase in the title.
+      schema:
+        type: string
+      example: SpaceX
+    title_contains_one:
+      in: query
+      name: title_contains_one
+      description: Search for documents with a title containing at least one keyword from comma-separated values.
+      schema:
+        type: string
+      example: SpaceX,Blue Origin
     launch:
       in: query
       name: launch
@@ -297,29 +329,13 @@ components:
       style: form
       example:
       - f33d5ece-e825-4cd8-809f-1d4c72a2e0d3
-    published_at_lte:
+    has_event:
       in: query
-      name: published_at_lte
-      description: Get all documents published before a given ISO8601 timestamp (included).
+      name: has_event
+      description: Get all documents that have a related event.
       schema:
-        type: string
-        format: date-time
-      example: '2026-12-31T23:59:59Z'
-    published_at_gt:
-      in: query
-      name: published_at_gt
-      description: Get all documents published after a given ISO8601 timestamp (excluded).
-      schema:
-        type: string
-        format: date-time
-      example: '2025-01-01T00:00:00Z'
-    summary_contains_one:
-      in: query
-      name: summary_contains_one
-      description: Search for documents with a summary containing at least one keyword from comma-separated values.
-      schema:
-        type: string
-      example: Falcon,Starship,Dragon
+        type: boolean
+      example: true
     event:
       in: query
       name: event
@@ -332,30 +348,32 @@ components:
       style: form
       example:
       - 42
-    has_event:
+    summary_contains_one:
       in: query
-      name: has_event
-      description: Get all documents that have a related event.
-      schema:
-        type: boolean
-      example: true
-    updated_at_gt:
-      in: query
-      name: updated_at_gt
-      description: Get all documents updated after a given ISO8601 timestamp (excluded).
+      name: summary_contains_one
+      description: Search for documents with a summary containing at least one keyword from comma-separated values.
       schema:
         type: string
-        format: date-time
-      example: '2025-01-01T00:00:00Z'
-    updated_at_lt:
-      in: query
-      name: updated_at_lt
-      description: Get all documents updated before a given ISO8601 timestamp (excluded).
-      schema:
-        type: string
-        format: date-time
-      example: '2026-12-31T23:59:59Z'
+      example: Falcon,Starship,Dragon
   schemas:
+    Event:
+      type: object
+      description: Relationship to a Launch Library 2 event (e.g. EVA, docking, milestone).
+      properties:
+        event_id:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          description: Launch Library 2 event identifier.
+          example: 851
+        provider:
+          type: string
+          readOnly: true
+          description: Source provider of the related event (typically Launch Library 2).
+          example: Launch Library 2
+      required:
+      - event_id
+      - provider
     PaginatedBlogList:
       type: object
       description: Paginated envelope wrapping a page of blog posts.
@@ -386,6 +404,76 @@ components:
           description: The current page of blog posts.
           items:
             $ref: '#/components/schemas/Blog'
+    Launch:
+      type: object
+      description: Relationship to a Launch Library 2 launch.
+      properties:
+        launch_id:
+          type: string
+          format: uuid
+          description: Launch Library 2 launch UUID.
+          example: f33d5ece-e825-4cd8-809f-1d4c72a2e0d3
+        provider:
+          type: string
+          readOnly: true
+          description: Source provider of the related launch (typically Launch Library 2).
+          example: Launch Library 2
+      required:
+      - launch_id
+      - provider
+    Socials:
+      type: object
+      description: Social media handles for an author.
+      properties:
+        x:
+          type: string
+          format: uri
+          maxLength: 200
+          description: URL of the author's X (Twitter) profile.
+          example: https://x.com/willrobinsons
+        youtube:
+          type: string
+          format: uri
+          maxLength: 200
+          description: URL of the author's YouTube channel.
+          example: https://youtube.com/@author
+        instagram:
+          type: string
+          format: uri
+          maxLength: 200
+          description: URL of the author's Instagram profile.
+          example: https://instagram.com/author
+        linkedin:
+          type: string
+          format: uri
+          maxLength: 200
+          description: URL of the author's LinkedIn profile.
+          example: https://linkedin.com/in/author
+        mastodon:
+          type: string
+          format: uri
+          maxLength: 200
+          description: URL of the author's Mastodon profile.
+          example: https://mastodon.social/@author
+        bluesky:
+          type: string
+          format: uri
+          maxLength: 200
+          description: URL of the author's Bluesky profile.
+          example: https://bsky.app/profile/author.bsky.social
+    Author:
+      type: object
+      description: Author byline for an article, blog, or report.
+      properties:
+        name:
+          type: string
+          maxLength: 250
+          description: Display name of the author.
+          example: Will Robinson-Smith
+        socials:
+          $ref: '#/components/schemas/Socials'
+      required:
+      - name
     Blog:
       type: object
       description: A spaceflight blog post (longform commentary or analysis) from a participating publisher.
@@ -463,91 +551,3 @@ components:
       - title
       - updated_at
       - url
-    Launch:
-      type: object
-      description: Relationship to a Launch Library 2 launch.
-      properties:
-        launch_id:
-          type: string
-          format: uuid
-          description: Launch Library 2 launch UUID.
-          example: f33d5ece-e825-4cd8-809f-1d4c72a2e0d3
-        provider:
-          type: string
-          readOnly: true
-          description: Source provider of the related launch (typically Launch Library 2).
-          example: Launch Library 2
-      required:
-      - launch_id
-      - provider
-    Event:
-      type: object
-      description: Relationship to a Launch Library 2 event (e.g. EVA, docking, milestone).
-      properties:
-        event_id:
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-          description: Launch Library 2 event identifier.
-          example: 851
-        provider:
-          type: string
-          readOnly: true
-          description: Source provider of the related event (typically Launch Library 2).
-          example: Launch Library 2
-      required:
-      - event_id
-      - provider
-    Socials:
-      type: object
-      description: Social media handles for an author.
-      properties:
-        x:
-          type: string
-          format: uri
-          maxLength: 200
-          description: URL of the author's X (Twitter) profile.
-          example: https://x.com/willrobinsons
-        youtube:
-          type: string
-          format: uri
-          maxLength: 200
-          description: URL of the author's YouTube channel.
-          example: https://youtube.com/@author
-        instagram:
-          type: string
-          format: uri
-          maxLength: 200
-          description: URL of the author's Instagram profile.
-          example: https://instagram.com/author
-        linkedin:
-          type: string
-          format: uri
-          maxLength: 200
-          description: URL of the author's LinkedIn profile.
-          example: https://linkedin.com/in/author
-        mastodon:
-          type: string
-          format: uri
-          maxLength: 200
-          description: URL of the author's Mastodon profile.
-          example: https://mastodon.social/@author
-        bluesky:
-          type: string
-          format: uri
-          maxLength: 200
-          description: URL of the author's Bluesky profile.
-          example: https://bsky.app/profile/author.bsky.social
-    Author:
-      type: object
-      description: Author byline for an article, blog, or report.
-      properties:
-        name:
-          type: string
-          maxLength: 250
-          description: Display name of the author.
-          example: Will Robinson-Smith
-        socials:
-          $ref: '#/components/schemas/Socials'
-      required:
-      - name
